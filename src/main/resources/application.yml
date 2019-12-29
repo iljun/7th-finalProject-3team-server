@@ -1,1 +1,14 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  resources:
+    add-mappings: false
+---
+spring:
+  profiles: asciidoc
+  resources:
+    add-mappings: true
 

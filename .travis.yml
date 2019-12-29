@@ -11,6 +11,7 @@ notifications:
     - sumusb34@gmail.com
   on_success: always
   on_failure: always
+  slack: depromeet7thserver:Or9OMGJWmP9viOlha0k34sCD
 install:
   - ./gradlew assemble -PencryptionKey=${ENCRIPTION_KEY}
 script:

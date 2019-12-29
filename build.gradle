@@ -6,9 +6,11 @@ plugins {
 	id 'org.asciidoctor.convert' version '1.5.9.2'
 }
 
-group = 'com.example.demo'
-version = '0.0.1-SNAPSHOT'
+group = 'com.depromeet.watni'
+version = ''
 sourceCompatibility = '1.8'
+archivesBaseName = 'watni'
+
 
 configurations {
 	compileOnly {

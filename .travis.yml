@@ -17,4 +17,4 @@ script:
   - gradle bootJar -PencryptionKey=${ENCRIPTION_KEY}
   - docker login docker.pkg.github.com --username iljun -p ${GITHUB_TOKEN}
   - docker build -t docker.pkg.github.com/depromeet/7th-finalproject-3team-server/watni:${TAG} .
-  - docker push docker.pkg.github.com/depromeet/7th-finalproject-3team-server/watni::${TAG}
+  - docker push docker.pkg.github.com/depromeet/7th-finalproject-3team-server/watni:${TAG}

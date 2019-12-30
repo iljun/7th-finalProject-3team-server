@@ -11,3 +11,11 @@
     - auth ${password}
     - select 0
 ```
+
+## Encryption Example
+add ENC(${encryptionValue}) to application.yml
+
+## Test Command
+```
+    gradle test -PencryptionKey=${encryptionKey}
+``` 

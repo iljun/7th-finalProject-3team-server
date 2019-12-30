@@ -29,9 +29,7 @@ dependencies {
 	implementation 'org.projectlombok:lombok'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.projectlombok:lombok'
 
 	// mapstruct
@@ -45,8 +43,18 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-hateoas"
 
 	// TODO Spring security
+
+	// https://mvnrepository.com/artifact/org.jasypt/jasypt
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
+
 }
 
 test {
+	if (!project.hasProperty('encryptionKey')) {
+		println 'not found encryptionKey'
+	} else {
+		println project.getProperty("encryptionKey")
+		systemProperty ("encryptionKey", project.getProperty("encryptionKey"))
+	}
 	useJUnitPlatform()
 }

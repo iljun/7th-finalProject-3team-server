@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: local
+jasypt:
+  encryptor:
+    bean: jasyptStringEncrptor
 ---
 spring:
   profiles: local
@@ -11,4 +14,3 @@ spring:
   profiles: asciidoc
   resources:
     add-mappings: true
-

@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.depromeet.watni.utils;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.junit.Test;

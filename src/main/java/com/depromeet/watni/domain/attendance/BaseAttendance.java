@@ -1,4 +1,4 @@
-package com.example.demo.domain.attendance;
+package com.depromeet.watni.domain.attendance;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.example.demo.supports;
+package com.depromeet.watni.supports;
 
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;

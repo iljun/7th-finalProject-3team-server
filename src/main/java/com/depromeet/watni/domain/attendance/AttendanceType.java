@@ -1,4 +1,4 @@
-package com.example.demo.domain.attendance;
+package com.depromeet.watni.domain.attendance;
 
 public enum AttendanceType {
     PUBLIC_URL,

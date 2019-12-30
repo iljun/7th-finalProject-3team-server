@@ -1,6 +1,6 @@
-package com.example.demo.supports;
+package com.depromeet.watni.supports;
 
-import com.example.demo.SampleApi;
+import com.depromeet.watni.SampleApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.example.demo.supports.ApiDocumentUtils.getDocumentRequest;
-import static com.example.demo.supports.ApiDocumentUtils.getDocumentResponse;
+import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
+import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;

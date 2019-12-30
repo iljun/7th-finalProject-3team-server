@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.depromeet.watni;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

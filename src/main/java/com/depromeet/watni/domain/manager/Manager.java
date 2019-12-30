@@ -1,6 +1,6 @@
-package com.example.demo.domain.manager;
+package com.depromeet.watni.domain.manager;
 
-import com.example.demo.domain.group.Group;
+import com.depromeet.watni.domain.group.Group;
 
 import javax.persistence.*;
 

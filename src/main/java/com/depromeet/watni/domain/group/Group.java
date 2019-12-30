@@ -1,7 +1,7 @@
-package com.example.demo.domain.group;
+package com.depromeet.watni.domain.group;
 
-import com.example.demo.domain.conference.Conference;
-import com.example.demo.domain.manager.Manager;
+import com.depromeet.watni.domain.conference.Conference;
+import com.depromeet.watni.domain.manager.Manager;
 
 import javax.persistence.*;
 import java.util.ArrayList;

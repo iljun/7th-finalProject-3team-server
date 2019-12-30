@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.depromeet.watni.config;
 
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;

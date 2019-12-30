@@ -1,4 +1,4 @@
-package com.example.demo.domain.accession;
+package com.depromeet.watni.domain.accession;
 
 public enum AccessionType {
     AUTO,

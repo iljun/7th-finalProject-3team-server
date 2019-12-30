@@ -1,7 +1,7 @@
-package com.example.demo.domain.conference;
+package com.depromeet.watni.domain.conference;
 
-import com.example.demo.domain.attendance.BaseAttendance;
-import com.example.demo.domain.group.Group;
+import com.depromeet.watni.domain.attendance.BaseAttendance;
+import com.depromeet.watni.domain.group.Group;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

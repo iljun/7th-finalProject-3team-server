@@ -38,6 +38,7 @@ dependencies {
 
 	// asciidoc
 	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.3.RELEASE'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.3.RELEASE'
 
 	// hateoas for Rest API
 	implementation "org.springframework.boot:spring-boot-starter-hateoas"
@@ -57,4 +58,20 @@ test {
 		systemProperty ("encryptionKey", project.getProperty("encryptionKey"))
 	}
 	useJUnitPlatform()
+}
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+bootJar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
 }

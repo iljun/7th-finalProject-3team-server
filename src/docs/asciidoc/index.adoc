@@ -1,0 +1,26 @@
+= WATNI API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== Sample
+
+[[sample]]
+
+=== Sample API
+
+==== Request
+
+include::{snippets}/GET_sample/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/GET_sample/response-fields.adoc[]
+
+===== Response example
+
+include::{snippets}/GET_sample/response-body.adoc[]

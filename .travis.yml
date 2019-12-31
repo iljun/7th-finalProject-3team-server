@@ -1,0 +1,21 @@
+language: java
+jdk:
+  - openjdk8
+sudo: required
+services:
+  - docker
+env:
+  - TAG="$(git rev-parse --short HEAD)"
+notifications:
+  email:
+    - sumusb34@gmail.com
+  on_success: always
+  on_failure: always
+  slack: depromeet7thserver:Or9OMGJWmP9viOlha0k34sCD
+install:
+  - gradle assemble -PencryptionKey=${ENCRYPTION_KEY}
+script:
+  - gradle bootJar -PencryptionKey=${ENCRYPTION_KEY}
+  - docker login docker.pkg.github.com --username iljun -p ${GITHUB_TOKEN}
+  - docker build -t docker.pkg.github.com/depromeet/7th-finalproject-3team-server/watni:${TAG} .
+  - docker push docker.pkg.github.com/depromeet/7th-finalproject-3team-server/watni:${TAG}

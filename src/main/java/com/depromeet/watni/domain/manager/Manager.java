@@ -4,8 +4,8 @@ import com.depromeet.watni.domain.group.Group;
 
 import javax.persistence.*;
 
-@Table
-@Entity(name = "manager")
+@Table(name = "manager")
+@Entity
 public class Manager {
 
     @Id

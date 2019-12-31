@@ -2,8 +2,8 @@ package com.depromeet.watni.domain.accession;
 
 import javax.persistence.*;
 
-@Table
-@Entity(name = "accession")
+@Table(name = "accession")
+@Entity
 public class Accession {
 
     @Id

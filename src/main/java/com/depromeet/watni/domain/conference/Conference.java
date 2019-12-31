@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table
-@Entity(name = "conference")
+@Table(name = "conference")
+@Entity
 public class Conference {
 
     @Id

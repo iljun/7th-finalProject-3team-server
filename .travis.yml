@@ -13,7 +13,7 @@ notifications:
   on_failure: always
   slack: depromeet7thserver:Or9OMGJWmP9viOlha0k34sCD
 install:
-  - ./gradlew assemble -PencryptionKey=${ENCRYPTION_KEY}
+  - gradle assemble -PencryptionKey=${ENCRYPTION_KEY}
 script:
   - gradle bootJar -PencryptionKey=${ENCRYPTION_KEY}
   - docker login docker.pkg.github.com --username iljun -p ${GITHUB_TOKEN}

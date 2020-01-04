@@ -47,14 +47,15 @@ dependencies {
 	// hateoas for Rest API
 	implementation "org.springframework.boot:spring-boot-starter-hateoas"
 
-	// TODO Spring security
-
 	// https://mvnrepository.com/artifact/org.jasypt/jasypt
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
 
 	// h2
 	testImplementation 'com.h2database:h2:1.4.199'
 	runtimeOnly 'com.h2database:h2:1.4.199'
+
+	// embeddedRedis
+	compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
 }
 
 test {

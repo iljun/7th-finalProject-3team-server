@@ -4,6 +4,13 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncrptor
+token:
+  access-token-expired: 1800
+  refresh-token-expired: 1209600
+  android-client-id:
+  android-client-secret:
+  ios-client-id:
+  ios-client-secret:
 ---
 spring:
   profiles: local
@@ -31,7 +38,6 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: ENC(lKCMlajCh1m+qxqppL1dEQ==)
 ---
 spring:
   profiles: asciidoc

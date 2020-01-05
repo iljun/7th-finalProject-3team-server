@@ -35,7 +35,7 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String accessToken = this.getAccessToken(request.getHeader("Authorization"));
 
-        return new AuthToken(accessToken);
+        return super.getAuthenticationManager().authenticate(new AuthToken(accessToken));
     }
 
     @Override

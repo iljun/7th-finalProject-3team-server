@@ -7,6 +7,26 @@
 :sectlinks:
 :snippets: ../../../build/generated-snippets
 
+== SignIn
+
+=== SignIn API
+
+==== Request
+
+include::{snippets}/sign-in/http-request.adoc[]
+
+==== Request Body
+
+include::{snippets}/sign-in/request-body.adoc[]
+
+==== Response
+
+include::{snippets}/sign-in/response-fields.adoc[]
+
+==== Response example
+
+include::{snippets}/sign-in/http-response.adoc[]
+
 == Member
 
 === Member API

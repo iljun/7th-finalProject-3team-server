@@ -2,6 +2,7 @@ package com.depromeet.watni.domain.member;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,17 +11,20 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class MemberDetail implements UserDetails {
 
     private long memberId;
     private String email;
     private String name;
+    private String password;
     // TODO append filed;
 
     public MemberDetail(Member member) {
         this.memberId = member.getId();
         this.email = member.getEmail();
         this.name = member.getName();
+        this.password = member.getPassword();
     }
 
     @Override
@@ -30,7 +34,7 @@ public class MemberDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override

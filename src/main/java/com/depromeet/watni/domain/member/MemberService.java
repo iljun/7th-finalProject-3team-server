@@ -1,24 +1,18 @@
 package com.depromeet.watni.domain.member;
 
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
-import com.depromeet.watni.security.token.store.RedisTokenStore;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberService implements UserDetailsService {
 
     private MemberRepository memberRepository;
-    private PasswordEncoder passwordEncoder;
 
-    public MemberService(MemberRepository memberRepository,
-                         PasswordEncoder passwordEncoder,
-                         RedisTokenStore redisTokenStore) {
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -32,7 +26,7 @@ public class MemberService implements UserDetailsService {
                 .builder()
                 .email(memberRequestDto.getEmail())
                 .name(memberRequestDto.getName())
-                .password(passwordEncoder.encode(memberRequestDto.getPassword()))
+                .password(memberRequestDto.getPassword())
                 .build();
         member = memberRepository.save(member);
         return member;

@@ -1,5 +1,6 @@
 package com.depromeet.watni.security.handler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -11,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class AuthFailureHandler implements AuthenticationFailureHandler {
+@Slf4j
+public class SignInFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         SecurityContextHolder.clearContext();
+        log.debug("SignInFailureHandler exception ", exception.toString());
         response.setStatus(400);
     }
 }

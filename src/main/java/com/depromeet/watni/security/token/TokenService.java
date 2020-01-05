@@ -4,6 +4,7 @@ import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.security.token.store.RedisTokenStore;
 import com.depromeet.watni.utils.TokenGenerate;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +25,12 @@ public class TokenService {
         return new TokenResult(accessToken, refreshToken);
     }
 
+    public void isDuplicateLogin(MemberDetail memberDetail) {
+        redisTokenStore.validDuplicateAuth(memberDetail);
+    }
+
     @Getter
+    @ToString
     public static class TokenResult {
         private String accessToken;
         private String refreshToken;

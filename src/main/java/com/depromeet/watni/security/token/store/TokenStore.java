@@ -23,4 +23,6 @@ public interface TokenStore {
     void storeAuth(MemberDetail authentication, String accessToken, String refreshToken);
 
     void deleteAuth(MemberDetail authentication);
+
+    void validDuplicateAuth(MemberDetail authentication);
 }

@@ -7,10 +7,8 @@ jasypt:
 token:
   access-token-expired: 1800
   refresh-token-expired: 1209600
-  android-client-id:
-  android-client-secret:
-  ios-client-id:
-  ios-client-secret:
+  client-id: ENC(N4r0cuzNvZ+3lFAgDD5V9Q==)
+  client-secret: ENC(HfsRWPAZfyUscBtaJCJB7DnBS5M1C3yF)
 ---
 spring:
   profiles: local

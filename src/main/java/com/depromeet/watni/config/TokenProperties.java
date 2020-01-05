@@ -8,8 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TokenProperties {
     private int accessTokenExpired;
     private int refreshTokenExpired;
-    private String androidClientId;
-    private String androidClientSecret;
-    private String iosClientId;
-    private String iosClientSecret;
+    private String clientId;
+    private String clientSecret;
 }

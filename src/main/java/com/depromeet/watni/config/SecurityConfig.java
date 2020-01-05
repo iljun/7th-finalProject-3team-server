@@ -2,7 +2,13 @@ package com.depromeet.watni.config;
 
 import com.depromeet.watni.security.filter.AuthFilter;
 import com.depromeet.watni.security.filter.AuthRequestMatcher;
+import com.depromeet.watni.security.filter.SignInFilter;
+import com.depromeet.watni.security.handler.AuthFailureHandler;
+import com.depromeet.watni.security.handler.AuthSuccessHandler;
+import com.depromeet.watni.security.handler.SignInFailureHandler;
+import com.depromeet.watni.security.handler.SignInSuccessHandler;
 import com.depromeet.watni.security.provider.AuthProvider;
+import com.depromeet.watni.security.provider.SignInProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +19,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -29,22 +33,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationProvider authenticationProvider;
     private AuthenticationSuccessHandler authenticationSuccessHandler;
     private AuthenticationFailureHandler authenticationFailureHandler;
+    private AuthenticationProvider signInProvider;
+    private AuthenticationSuccessHandler signInSuccessHandler;
+    private AuthenticationFailureHandler signInFailureHandler;
 
     public SecurityConfig(AuthProvider authenticationProvider,
-                          AuthenticationSuccessHandler authenticationSuccessHandler,
-                          AuthenticationFailureHandler authenticationFailureHandler) {
+                          AuthSuccessHandler authenticationSuccessHandler,
+                          AuthFailureHandler authenticationFailureHandler,
+                          SignInProvider signInProvider,
+                          SignInSuccessHandler signInSuccessHandler,
+                          SignInFailureHandler signInFailureHandler) {
         this.authenticationProvider = authenticationProvider;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.authenticationFailureHandler = authenticationFailureHandler;
+        this.signInProvider = signInProvider;
+        this.signInSuccessHandler = signInSuccessHandler;
+        this.signInFailureHandler = signInFailureHandler;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -56,10 +64,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return apiFilter;
     }
 
+    private AbstractAuthenticationProcessingFilter generateSignInFilter() throws Exception {
+        AbstractAuthenticationProcessingFilter signInFilter = new SignInFilter("/sign-in", this.signInSuccessHandler, this.signInFailureHandler);
+        signInFilter.setAuthenticationManager(super.authenticationManagerBean());
+        return signInFilter;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .authenticationProvider(authenticationProvider);
+                .authenticationProvider(this.signInProvider)
+                .authenticationProvider(this.authenticationProvider);
     }
 
     @Override
@@ -84,6 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.headers().frameOptions().disable();
         http
+                .addFilterBefore(this.generateSignInFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(this.generateApiFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // TODO csrf

@@ -96,4 +96,18 @@ public class RedisTokenStore implements TokenStore {
         redisTemplate.delete(AUTH_TO_ACCESS + authentication);
         redisTemplate.delete(AUTH_TO_REFRESH + authentication);
     }
+
+    @Override
+    public void validDuplicateAuth(MemberDetail authentication) {
+        if (redisTemplate.hasKey(AUTH_TO_ACCESS + authentication) || redisTemplate.hasKey(AUTH_TO_REFRESH + authentication)) {
+            String accessToken = redisTemplate.opsForValue().get(AUTH_TO_ACCESS + authentication).toString();
+            String refreshToken = redisTemplate.opsForValue().get(AUTH_TO_REFRESH + authentication).toString();
+            redisTemplate.delete(AUTH_TO_ACCESS + authentication);
+            redisTemplate.delete(AUTH_TO_REFRESH + authentication);
+            redisTemplate.delete(ACCESS_TO_REFRESH + accessToken);
+            redisTemplate.delete(ACCESS_TO_AUTH + accessToken);
+            redisTemplate.delete(REFRESH_TO_ACCESS + refreshToken);
+            redisTemplate.delete(REFRESH_TO_AUTH + refreshToken);
+        }
+    }
 }

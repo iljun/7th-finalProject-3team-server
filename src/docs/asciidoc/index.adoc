@@ -7,20 +7,22 @@
 :sectlinks:
 :snippets: ../../../build/generated-snippets
 
-== Sample
+== Member
 
-[[sample]]
-
-=== Sample API
+=== Member API
 
 ==== Request
 
-include::{snippets}/GET_sample/http-request.adoc[]
+include::{snippets}/POST_member/http-request.adoc[]
+
+==== Request Body
+
+include::{snippets}/POST_member/request-body.adoc[]
 
 ==== Response
 
-include::{snippets}/GET_sample/response-fields.adoc[]
+include::{snippets}/POST_member/response-fields.adoc[]
 
 ===== Response example
 
-include::{snippets}/GET_sample/response-body.adoc[]
+include::{snippets}/POST_member/http-response.adoc[]

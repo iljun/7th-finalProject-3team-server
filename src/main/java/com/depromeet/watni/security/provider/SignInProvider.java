@@ -48,7 +48,6 @@ public class SignInProvider implements AuthenticationProvider {
         if (!clientSecret.equals(tokenProperties.getClientSecret())) {
             throw new BadRequestException("clientSecrect is not matched");
         }
-        
         MemberDetail memberDetail = (MemberDetail) memberService.loadUserByUsername(email);
         if (!passwordEncoder.matches(password, memberDetail.getPassword())) {
             throw new BadRequestException("password not matched");

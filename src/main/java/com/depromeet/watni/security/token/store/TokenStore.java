@@ -25,4 +25,8 @@ public interface TokenStore {
     void deleteAuth(MemberDetail authentication);
 
     void validDuplicateAuth(MemberDetail authentication);
+
+    long getExpiredTime(String refreshToken);
+
+    void updateRefreshToken(MemberDetail authentication, String accessToken, String refreshToken);
 }

@@ -24,7 +24,7 @@ public class RedisTokenStore implements TokenStore {
     private final String REFRESH_TO_ACCESS = "refresh_to_access:";
     private final String REFRESH_TO_AUTH = "refresh_to_auth:";
     private final String AUTH_TO_ACCESS = "auth_to_access:";
-    private final String AUTH_TO_REFRESH = "refresh_to_access:";
+    private final String AUTH_TO_REFRESH = "auth_to_refresh:";
 
     @Override
     public MemberDetail readAuthentication(String accessToken) {
@@ -109,5 +109,24 @@ public class RedisTokenStore implements TokenStore {
             redisTemplate.delete(REFRESH_TO_ACCESS + refreshToken);
             redisTemplate.delete(REFRESH_TO_AUTH + refreshToken);
         }
+    }
+
+    @Override
+    public long getExpiredTime(String refreshToken) {
+        return redisTemplate.getExpire(refreshToken);
+    }
+
+    @Override
+    public void updateRefreshToken(MemberDetail authentication, String accessToken, String refreshToken) {
+        ValueOperations<String, String> refreshTokenToAccessToken = redisTemplate.opsForValue();
+        refreshTokenToAccessToken.set(REFRESH_TO_ACCESS + refreshToken, accessToken, tokenProperties.getRefreshTokenExpired(), TimeUnit.SECONDS);
+        ValueOperations<String, MemberDetail> refreshTokenToAuth = redisTemplate.opsForValue();
+        refreshTokenToAuth.set(REFRESH_TO_AUTH + refreshToken, authentication, tokenProperties.getRefreshTokenExpired(), TimeUnit.SECONDS);
+
+        ValueOperations<String, String> accessValue = redisTemplate.opsForValue();
+        accessValue.get(AUTH_TO_ACCESS + authentication.toString()).replace(AUTH_TO_ACCESS + authentication.toString(), accessToken);
+        ValueOperations<String, String> refreshValue = redisTemplate.opsForValue();
+        refreshValue.get(AUTH_TO_REFRESH + authentication.toString()).replace(AUTH_TO_REFRESH + authentication.toString(), accessToken);
+
     }
 }

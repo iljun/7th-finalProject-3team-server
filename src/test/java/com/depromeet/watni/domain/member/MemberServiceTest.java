@@ -24,7 +24,7 @@ public class MemberServiceTest {
 
     @Test
     public void 회원_가입() {
-        MemberRequestDto memberRequestDto = new MemberRequestDto("test@naver.com", "awerawf", "testUser");
+        MemberRequestDto memberRequestDto = new MemberRequestDto("testuser@naver.com", "awerawf", "testUser");
         Member member = memberService.createMember(memberRequestDto);
         Assert.assertNotNull(member);
         Assert.assertEquals(member.getEmail(), memberRequestDto.getEmail());

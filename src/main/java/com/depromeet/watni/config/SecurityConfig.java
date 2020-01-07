@@ -114,8 +114,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http
                 .addFilterBefore(this.generateSignInFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(this.generateApiFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(this.generateTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(this.generateApiFilter(), UsernamePasswordAuthenticationFilter.class);
+        // TODO Refactoring
+//                .addFilterBefore(this.generateTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // TODO csrf
         http

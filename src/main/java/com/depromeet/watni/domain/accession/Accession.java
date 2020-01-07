@@ -1,5 +1,7 @@
 package com.depromeet.watni.domain.accession;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,16 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.depromeet.watni.domain.conference.Conference;
 import com.depromeet.watni.domain.group.Group;
+import com.depromeet.watni.domain.group.Group.GroupBuilder;
 import com.depromeet.watni.domain.member.Member;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Table(name = "accession")
 @Entity
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Accession {
 
     @Id

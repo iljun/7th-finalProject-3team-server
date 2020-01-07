@@ -12,15 +12,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.depromeet.watni.domain.conference.Conference;
-import com.depromeet.watni.domain.manager.Manager;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Table(name = "groups")
 @Entity
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Group {
 
     @Id

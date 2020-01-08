@@ -4,11 +4,6 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncrptor
-token:
-  access-token-expired: 1800
-  refresh-token-expired: 1209600
-  client-id: ENC(N4r0cuzNvZ+3lFAgDD5V9Q==)
-  client-secret: ENC(HfsRWPAZfyUscBtaJCJB7DnBS5M1C3yF)
 ---
 spring:
   profiles: local
@@ -41,3 +36,31 @@ spring:
   profiles: asciidoc
   resources:
     add-mappings: true
+---
+spring:
+  profiles: schema
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+---
+spring:
+  profiles: dev
+  datasource:
+    watni:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://watni.cnt6okgpvlyj.ap-northeast-2.rds.amazonaws.com:3306/watni?useUnicode=true&characterEncoding=utf8
+      username: watni_application
+      password: ENC(Bp754nRhwnR/wuNXgU0/Lp11G7TakLXRAHKZegzpZGE=)
+      maximum-pool-size: 10
+      max-lifetime: 55000
+    jpa:
+      show-sql: true
+      hibernate:
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+    host: ec2-52-78-36-242.ap-northeast-2.compute.amazonaws.com
+    port: 6379
+    password: ENC(8zxM4iv134exwFlDz84a4A==)

@@ -22,25 +22,16 @@ public class AccessionService {
 	private final MemberService memberService;
 
 	@Transactional
-	public List<Accession> accessGroupByManagers(Long groupId, List<Long> memberIdList) {
+	public List<Accession> accessGroupByCode(Long groupId, List<Long> memberIdList,AccessionRole accessionRole) {
 		Group group = groupService.getGroup(groupId);
 		List<Accession> accesionList = new ArrayList<Accession>();
 		for (Long memberId : memberIdList) {
 			Member member = memberService.getMember(memberId);
-			Accession accession = Accession.builder().accessionRole(AccessionRole.MANAGER)
+			Accession accession = Accession.builder().accessionRole(accessionRole)
 					.accessionType(AccessionType.AUTO).accessionStatus(AccessionStatus.ACCEPT).group(group)
 					.member(member).build();
 			accesionList.add(accession);
 		}
 		return accessionRepository.saveAll(accesionList);
-	}
-
-	@Transactional
-	public Accession accessGroupByMember(Long groupId, Long memberId) {
-		Group group = groupService.getGroup(groupId);
-		Member member = memberService.getMember(memberId);
-		Accession accession = Accession.builder().accessionRole(AccessionRole.USER).accessionType(AccessionType.AUTO)
-				.accessionStatus(AccessionStatus.ACCEPT).group(group).member(member).build();
-		return accessionRepository.save(accession);
 	}
 }

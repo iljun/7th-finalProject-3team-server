@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.depromeet.watni.domain.accession.dto.AccessionDto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class AccessionController {
 	private final AccessionService accessionService;
 
-	@PostMapping("api/accessions/{groupId}")
-	public List<Accession> accessGroupByManagers(@PathVariable Long groupId, @RequestBody List<Long> memberIdList) {
-		return accessionService.accessGroupByManagers(groupId, memberIdList);
+	@PostMapping("api/accessions/auto/code")
+	public List<Accession> accessGroupByManagers(@RequestBody AccessionDto accessionDto) {
+		return accessionService.accessGroupByCode(accessionDto.getGroupId(), accessionDto.getMemberIdList(),accessionDto.getAccessionRole());
 	}
+	
 }

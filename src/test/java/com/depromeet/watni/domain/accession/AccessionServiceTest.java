@@ -35,7 +35,7 @@ public class AccessionServiceTest {
 		Group group = sampleData.createGroup();
 		List<Long> memberIdList = new ArrayList<Long>();
 		memberIdList.add(member.getMemberId());
-		List<Accession> accessions = accessionService.accessGroupByManagers(group.getId(), memberIdList);
+		List<Accession> accessions = accessionService.accessGroupByCode(group.getId(), memberIdList,AccessionRole.MANAGER);
 		Assert.assertNotNull(accessions);
 	}
 }

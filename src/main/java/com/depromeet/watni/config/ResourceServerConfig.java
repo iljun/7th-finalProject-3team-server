@@ -3,7 +3,9 @@ package com.depromeet.watni.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -48,14 +50,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 //.authorizeRequests().anyRequest().authenticated() // "error": "unauthorized",
                 .authorizeRequests()
-                .antMatchers("/sing-up")
+                .antMatchers(HttpMethod.POST, "/api/member**")
                 .permitAll()
-            .and()
-                .authorizeRequests()
-                .antMatchers("/api/**")
+                .anyRequest()
                 .authenticated()
             .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

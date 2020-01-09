@@ -45,7 +45,7 @@ public class MemberDocuments {
                         .accept(MediaType.APPLICATION_JSON)
         );
 
-        result.andExpect(status().isCreated())
+        result.andExpect(status().isOk())
                 .andDo(document("POST_member",
                         getDocumentRequest(),
                         getDocumentResponse(),
@@ -53,10 +53,6 @@ public class MemberDocuments {
                                 fieldWithPath("email").description("unique email"),
                                 fieldWithPath("password").description("password"),
                                 fieldWithPath("name").description("username")
-                        ),
-                        responseFields(
-                                fieldWithPath("accessToken").description("available for 30 minutes access token"),
-                                fieldWithPath("refreshToken").description("available for 14 days refresh token")
                         )
                 ));
     }

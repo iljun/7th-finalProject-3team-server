@@ -33,6 +33,8 @@ spring:
     port: 6379
   main:
     allow-bean-definition-overriding: true
+logging.level:
+  root: DEBUG
 ---
 spring:
   profiles: asciidoc
@@ -66,3 +68,5 @@ spring:
     host: ec2-52-78-36-242.ap-northeast-2.compute.amazonaws.com
     port: 6379
     password: ENC(8zxM4iv134exwFlDz84a4A==)
+logging.level:
+  root: DEBUG

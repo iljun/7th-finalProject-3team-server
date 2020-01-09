@@ -19,7 +19,7 @@ public class MemberApi {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/api/member")
     public ResponseEntity saveMember(@RequestBody @Validated MemberRequestDto memberRequestDto) {
         memberRequestDto.encodedPassword(this.passwordEncoder);
         Member member = memberService.createMember(memberRequestDto);

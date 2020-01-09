@@ -2,6 +2,7 @@ package com.depromeet.watni.config;
 
 import com.depromeet.watni.domain.member.MemberService;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,7 +15,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+@Profile("!local")
+    public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
     private final RedisConnectionFactory redisConnectionFactory;
@@ -42,4 +44,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenStore(new RedisTokenStore(this.redisConnectionFactory))
                 .userDetailsService(memberService);
     }
+
 }

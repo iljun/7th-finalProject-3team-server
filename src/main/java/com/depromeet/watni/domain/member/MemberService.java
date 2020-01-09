@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class MemberService implements UserDetailsService {
 
     private MemberRepository memberRepository;
-
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -31,4 +30,5 @@ public class MemberService implements UserDetailsService {
         member = memberRepository.save(member);
         return member;
     }
+
 }

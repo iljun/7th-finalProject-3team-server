@@ -12,7 +12,7 @@ public class MemberService {
 	private MemberRepository memberRepository;
 	
 	public Member getMember(Long memberId) {
-		return memberRepository.findById(memberId).orElseThrow(()-> new NotFoundException("존재하지 않는 memberId입니다"));
+		return memberRepository.findById(memberId).orElseThrow(()-> new NotFoundException("NOT FOUND MEMBER"));
 	}
 	
 

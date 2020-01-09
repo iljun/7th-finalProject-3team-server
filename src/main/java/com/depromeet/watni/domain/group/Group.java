@@ -11,19 +11,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.depromeet.watni.domain.accession.Accession;
+import com.depromeet.watni.domain.accession.AccessionRole;
+import com.depromeet.watni.domain.accession.AccessionStatus;
+import com.depromeet.watni.domain.accession.AccessionType;
+import com.depromeet.watni.domain.accession.Accession.AccessionBuilder;
 import com.depromeet.watni.domain.conference.Conference;
+import com.depromeet.watni.domain.group.dto.GroupResponseDto;
+import com.depromeet.watni.domain.member.Member;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "groups")
 @Entity
 @Builder
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@NoArgsConstructor(access=AccessLevel.PROTECTED)
+@AllArgsConstructor(access=AccessLevel.PROTECTED)
 public class Group {
 
     @Id
@@ -43,6 +51,10 @@ public class Group {
     */
     
     private String code;
+   
+    public GroupResponseDto toResponseDto() {
+    	return GroupResponseDto.builder().id(this.id).name(this.name).code(this.code).conferences(this.conferences).build();
+    }
 
     // TODO createdAt, modifiedAt
 }

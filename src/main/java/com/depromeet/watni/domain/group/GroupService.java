@@ -15,19 +15,19 @@ import lombok.RequiredArgsConstructor;
 public class GroupService {
 	private final GroupRepository groupRepository;
 
-	public boolean checkDuplicateGroupCode(String code) {
+	public boolean checkRedundantGroupCode(String code) {
 		if (groupRepository.findOneByCode(code).isPresent())
-			throw new BadRequestException("이미 존재하는 코드입니다");
+			throw new BadRequestException("This code is redundant.");
 		return true;
 	}
 
 	public Group createGroup(GroupDto groupDto) {
-		checkDuplicateGroupCode(groupDto.getCode());
+		checkRedundantGroupCode(groupDto.getCode());
 		Group group = Group.builder().name(groupDto.getGroupName()).code(groupDto.getCode()).build();
 		return groupRepository.save(group);
 	}
 
 	public Group getGroup(Long groupId) {
-		return groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException("존재하지 않는 그룹id입니다"));
+		return groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException("NOT FOUND GROUP"));
 	}
 }

@@ -5,5 +5,5 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
-	public Optional<Group> findOneByCode(String code);
+	Optional<Group> findOneByCode(String code);
 }

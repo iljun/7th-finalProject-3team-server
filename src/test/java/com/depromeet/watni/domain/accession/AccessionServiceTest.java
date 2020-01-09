@@ -37,5 +37,9 @@ public class AccessionServiceTest {
 		memberIdList.add(member.getMemberId());
 		List<Accession> accessions = accessionService.accessGroupByCode(group.getId(), memberIdList,AccessionRole.MANAGER);
 		Assert.assertNotNull(accessions);
+		Assert.assertEquals(accessions.get(0).getGroup(), group);
+		Assert.assertEquals(accessions.get(0).getMember(), member);
+		Assert.assertEquals(accessions.get(0).getAccessionRole(), AccessionRole.MANAGER);
+		
 	}
 }

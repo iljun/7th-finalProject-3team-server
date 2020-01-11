@@ -1,0 +1,7 @@
+{
+  "email": "test@google.com",
+  "password": "test1234",
+  "grantType": "PASSWORD",
+  "clientId": "test-client",
+  "clientSecret": "test-secret"
+}

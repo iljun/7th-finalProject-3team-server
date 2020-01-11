@@ -7,20 +7,66 @@
 :sectlinks:
 :snippets: ../../../build/generated-snippets
 
-== Sample
+== Oauth
 
-[[sample]]
+=== oauth/token
 
-=== Sample API
+==== Request Header
+
+include::{snippets}/generate_token/request-headers.adoc[]
 
 ==== Request
 
-include::{snippets}/GET_sample/http-request.adoc[]
+include::{snippets}/generate_token/http-request.adoc[]
+
+==== Request Parameter
+
+include::{snippets}/generate_token/request-parameters.adoc[]
 
 ==== Response
 
-include::{snippets}/GET_sample/response-fields.adoc[]
+include::{snippets}/generate_token/response-fields.adoc[]
+
+==== Response example
+
+include::{snippets}/generate_token/http-response.adoc[]
+
+
+=== oauth/token
+
+==== Request Header
+
+include::{snippets}/refresh_token/request-headers.adoc[]
+
+==== Request
+
+include::{snippets}/refresh_token/http-request.adoc[]
+
+==== Request Parameter
+
+include::{snippets}/refresh_token/request-parameters.adoc[]
+
+==== Response example
+
+include::{snippets}/refresh_token/http-response.adoc[]
+
+
+== Member
+
+=== Member API
+
+==== Request
+
+include::{snippets}/POST_member/http-request.adoc[]
+
+==== Request Body
+
+include::{snippets}/POST_member/request-body.adoc[]
+
+==== Response
+
+include::{snippets}/POST_member/response-fields.adoc[]
 
 ===== Response example
 
-include::{snippets}/GET_sample/response-body.adoc[]
+include::{snippets}/POST_member/http-response.adoc[]

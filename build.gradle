@@ -55,6 +55,8 @@ dependencies {
 	// h2
 	testImplementation 'com.h2database:h2:1.4.199'
 	runtimeOnly 'com.h2database:h2:1.4.199'
+
+	implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
 }
 
 test {

@@ -31,5 +31,7 @@ public class GroupServiceTest {
 		GroupDto groupDto = GroupDto.builder().code("testcode").groupName("테스트그룹").build();
 		Group group = groupService.createGroup(groupDto);
 		Assert.assertNotNull(group);
+		boolean check = groupService.checkGroupCode(group.getId(), "testcode");
+		Assert.assertEquals(check, true);
 	}
 }

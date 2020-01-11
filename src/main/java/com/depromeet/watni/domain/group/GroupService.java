@@ -30,4 +30,11 @@ public class GroupService {
 	public Group getGroup(Long groupId) {
 		return groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException("NOT FOUND GROUP"));
 	}
+	
+	public boolean checkGroupCode(Long groupId,String code) {
+		Group group = getGroup(groupId);
+		if(!group.getCode().equals(code))
+			throw new BadRequestException("Invalid code");
+		return true;
+	}
 }

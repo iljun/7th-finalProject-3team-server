@@ -19,9 +19,9 @@ include::{snippets}/generate_token/request-headers.adoc[]
 
 include::{snippets}/generate_token/http-request.adoc[]
 
-==== Request Parameter
+==== Request Body
 
-include::{snippets}/generate_token/request-parameters.adoc[]
+include::{snippets}/generate_token/request-body.adoc[]
 
 ==== Response
 
@@ -42,9 +42,9 @@ include::{snippets}/refresh_token/request-headers.adoc[]
 
 include::{snippets}/refresh_token/http-request.adoc[]
 
-==== Request Parameter
+==== Request Body
 
-include::{snippets}/refresh_token/request-parameters.adoc[]
+include::{snippets}/refresh_token/request-body.adoc[]
 
 ==== Response example
 
@@ -62,10 +62,6 @@ include::{snippets}/POST_member/http-request.adoc[]
 ==== Request Body
 
 include::{snippets}/POST_member/request-body.adoc[]
-
-==== Response
-
-include::{snippets}/POST_member/response-fields.adoc[]
 
 ===== Response example
 

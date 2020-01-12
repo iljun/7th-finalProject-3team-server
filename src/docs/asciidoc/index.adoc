@@ -53,7 +53,7 @@ include::{snippets}/refresh_token/http-response.adoc[]
 
 == Member
 
-=== Member API
+=== sign-up API
 
 ==== Request
 

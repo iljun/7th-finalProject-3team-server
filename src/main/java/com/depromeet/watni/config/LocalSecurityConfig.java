@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,18 +23,6 @@ public class LocalSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/member**")
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/oauth/token")
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated();
         http.csrf().disable();
     }
 
@@ -53,5 +40,4 @@ public class LocalSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 }

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class GroupResponseDto {
-	private long id;
+	private long groupId;
 
 	private String name;
 

@@ -18,10 +18,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 @AllArgsConstructor(access=AccessLevel.PROTECTED)
 public class AccessionDto {
-	@NotNull
-	private Long groupId;
+
 	@NotNull
 	private List<Long> memberIdList;
 	@NotNull
 	private AccessionRole accessionRole;
+	
+	//optional
+	private String code;
 }

@@ -25,11 +25,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Table(name = "groups")
 @Entity
 @Builder
 @Getter
+@ToString
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 @AllArgsConstructor(access=AccessLevel.PROTECTED)
 public class Group {
@@ -37,7 +39,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
-    private long id;
+    private long groupId;
 
     @Column(name = "name")
     private String name;
@@ -49,11 +51,10 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Manager> managers = new ArrayList<>();
     */
-    
-    private String code;
    
+    //map struct
     public GroupResponseDto toResponseDto() {
-    	return GroupResponseDto.builder().id(this.id).name(this.name).code(this.code).conferences(this.conferences).build();
+    	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).build();
     }
 
     // TODO createdAt, modifiedAt

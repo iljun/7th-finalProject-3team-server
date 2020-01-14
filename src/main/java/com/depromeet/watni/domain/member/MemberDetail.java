@@ -1,5 +1,6 @@
 package com.depromeet.watni.domain.member;
 
+import com.depromeet.watni.domain.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

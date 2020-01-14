@@ -1,6 +1,10 @@
-package com.depromeet.watni.domain.member;
+package com.depromeet.watni.domain.member.api;
 
+import com.depromeet.watni.domain.member.MemberDetail;
+import com.depromeet.watni.domain.member.domain.Member;
+import com.depromeet.watni.domain.member.dto.MemberMapper;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
+import com.depromeet.watni.domain.member.service.MemberService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

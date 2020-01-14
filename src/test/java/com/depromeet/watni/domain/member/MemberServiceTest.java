@@ -1,6 +1,8 @@
 package com.depromeet.watni.domain.member;
 
+import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
+import com.depromeet.watni.domain.member.service.MemberService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

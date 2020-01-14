@@ -1,9 +1,8 @@
-package com.depromeet.watni.domain.member;
+package com.depromeet.watni.domain.member.dto;
 
-import com.depromeet.watni.domain.member.dto.MemberResponse;
+import com.depromeet.watni.domain.member.MemberDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.http.ResponseEntity;
 
 @Mapper
 public interface MemberMapper {

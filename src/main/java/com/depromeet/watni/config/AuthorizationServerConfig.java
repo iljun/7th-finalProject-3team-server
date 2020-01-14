@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAuthorizationServer
 @Profile("!local")
-    public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
     private final RedisConnectionFactory redisConnectionFactory;

@@ -21,7 +21,8 @@ import java.nio.charset.Charset;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -39,7 +40,7 @@ public class MemberDocuments {
         String body = readJson("member-signup.json");
 
         ResultActions result = this.mockMvc.perform(
-                RestDocumentationRequestBuilders.post("/api/member")
+                RestDocumentationRequestBuilders.post("/sign-up")
                         .content(body)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)

@@ -1,12 +1,8 @@
-package com.depromeet.watni.domain.accession;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.depromeet.watni.domain.manager;
 
 import javax.transaction.Transactional;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,30 +11,29 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.depromeet.watni.domain.group.Group;
 import com.depromeet.watni.domain.group.GroupService;
+import com.depromeet.watni.domain.group.dto.GroupDto;
+import com.depromeet.watni.domain.groupcode.GroupCode;
+import com.depromeet.watni.domain.groupcode.GroupCodeService;
 import com.depromeet.watni.domain.member.Member;
 import com.depromeet.watni.supports.SampleData;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-public class AccessionServiceTest {
+public class ManagerServiceTest {
 	@Autowired
-	AccessionService accessionService;
+	ManagerService managerService;
 	@Autowired
 	GroupService groupService;
 	@Autowired
 	SampleData sampleData;
 
 	@Test
-	public void 관리자로_모임참가() {
+	public void 매니저_등록_확인() {
 		Member member = sampleData.createMember();
 		Group group = sampleData.createGroup();
-		List<Long> memberIdList = new ArrayList<Long>();
-		memberIdList.add(member.getMemberId());
-		List<Accession> accessions = accessionService.accessGroupByCode(group.getGroupId(), memberIdList);
-		Assert.assertNotNull(accessions);
-		Assert.assertEquals(accessions.get(0).getGroup(), group);
-		Assert.assertEquals(accessions.get(0).getMember(), member);
-		
+		Manager manager = managerService.registerManager(group.getGroupId(), member.getMemberId());
+		Assert.assertNotNull(manager);
+		managerService.checkManager(group.getGroupId(), member.getMemberId());
 	}
 }

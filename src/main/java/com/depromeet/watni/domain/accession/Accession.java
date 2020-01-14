@@ -56,13 +56,10 @@ public class Accession {
 	@JoinColumn(name = "group_id")
 	private Group group;
 
-	@Column(name = "accession_role")
-	@Enumerated(value = EnumType.STRING)
-	private AccessionRole accessionRole;
 
 	public AccessionResponseDto toResponseDto() {
 		return AccessionResponseDto.builder().id(id).accessionType(accessionType).accessionStatus(accessionStatus)
-				.member(member).group(group).accessionRole(accessionRole).build();
+				.member(member).group(group).build();
 	}
 
 	// TODO createdAt, modifiedAt

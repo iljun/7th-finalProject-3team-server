@@ -11,14 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.depromeet.watni.domain.accession.Accession;
-import com.depromeet.watni.domain.accession.AccessionRole;
-import com.depromeet.watni.domain.accession.AccessionStatus;
-import com.depromeet.watni.domain.accession.AccessionType;
-import com.depromeet.watni.domain.accession.Accession.AccessionBuilder;
 import com.depromeet.watni.domain.conference.Conference;
 import com.depromeet.watni.domain.group.dto.GroupResponseDto;
-import com.depromeet.watni.domain.member.Member;
+import com.depromeet.watni.domain.manager.Manager;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -47,10 +42,9 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Conference> conferences = new ArrayList<>();
 
-    /*
-    @OneToMany(mappedBy = "group")
-    private List<Manager> managers = new ArrayList<>();
-    */
+    
+//    @OneToMany(mappedBy = "group")
+//    private List<Manager> managers = new ArrayList<>();
    
     //map struct
     public GroupResponseDto toResponseDto() {

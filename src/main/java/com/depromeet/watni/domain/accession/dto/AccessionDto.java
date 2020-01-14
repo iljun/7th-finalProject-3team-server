@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.depromeet.watni.domain.accession.AccessionRole;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +18,6 @@ public class AccessionDto {
 
 	@NotNull
 	private List<Long> memberIdList;
-	@NotNull
-	private AccessionRole accessionRole;
 	
 	//optional
 	private String code;

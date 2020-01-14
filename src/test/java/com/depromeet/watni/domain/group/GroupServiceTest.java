@@ -33,6 +33,7 @@ public class GroupServiceTest {
 		GroupDto groupDto = GroupDto.builder().code("testcode").groupName("테스트그룹").build();
 		Group group = groupService.createGroup(groupDto);
 		GroupCode groupCode = groupCodeService.createGroupCode(group.getGroupId(), "testcode");
-		System.out.println(groupCode);
+		Assert.assertEquals(groupCode.getCode(), "testcode");
+		Assert.assertEquals(groupCode.getGroup(), group);
 	}
 }

@@ -1,7 +1,8 @@
-package com.depromeet.watni.domain.conference;
+package com.depromeet.watni.domain.conference.domain;
 
-import com.depromeet.watni.domain.attendance.BaseAttendance;
-import com.depromeet.watni.domain.group.Group;
+import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.attendance.domain.BaseAttendance;
+import com.depromeet.watni.domain.group.domain.Group;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Table(name = "conference")
 @Entity
-public class Conference {
+public class Conference extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

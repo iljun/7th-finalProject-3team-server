@@ -1,4 +1,4 @@
-package com.depromeet.watni.domain.attendance;
+package com.depromeet.watni.domain.attendance.constant;
 
 public enum AttendanceType {
     PUBLIC_URL,

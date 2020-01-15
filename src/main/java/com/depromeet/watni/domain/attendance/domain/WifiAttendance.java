@@ -1,4 +1,4 @@
-package com.depromeet.watni.domain.attendance;
+package com.depromeet.watni.domain.attendance.domain;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

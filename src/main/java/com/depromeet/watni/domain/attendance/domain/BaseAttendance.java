@@ -1,6 +1,8 @@
-package com.depromeet.watni.domain.attendance;
+package com.depromeet.watni.domain.attendance.domain;
 
-import com.depromeet.watni.domain.conference.Conference;
+import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.attendance.constant.AttendanceType;
+import com.depromeet.watni.domain.conference.domain.Conference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name = "attendance_type")
 @Entity
-public abstract class BaseAttendance {
+public abstract class BaseAttendance extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

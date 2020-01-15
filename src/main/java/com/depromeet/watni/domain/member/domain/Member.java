@@ -1,5 +1,6 @@
 package com.depromeet.watni.domain.member.domain;
 
+import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,31 +1,14 @@
-package com.depromeet.watni.domain.accession;
+package com.depromeet.watni.domain.accession.domain;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.accession.constant.AccessionStatus;
+import com.depromeet.watni.domain.accession.constant.AccessionType;
 import com.depromeet.watni.domain.accession.dto.AccessionResponseDto;
-import com.depromeet.watni.domain.conference.Conference;
-import com.depromeet.watni.domain.group.Group;
-import com.depromeet.watni.domain.group.Group.GroupBuilder;
+import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.member.Member;
+import lombok.*;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Table(name = "accession")
 @Entity
@@ -33,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Accession {
+public class Accession extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.depromeet.watni.domain.member.dto;
 
-import com.depromeet.watni.domain.group.Group;
+import com.depromeet.watni.domain.group.domain.Group;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

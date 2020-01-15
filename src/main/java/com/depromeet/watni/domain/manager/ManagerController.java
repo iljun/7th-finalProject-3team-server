@@ -1,14 +1,12 @@
 package com.depromeet.watni.domain.manager;
 
+import com.depromeet.watni.domain.manager.domain.Manager;
+import com.depromeet.watni.domain.manager.dto.ManagerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.depromeet.watni.domain.manager.dto.ManagerDto;
-
-import lombok.Delegate;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor

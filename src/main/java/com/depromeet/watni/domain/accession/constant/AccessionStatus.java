@@ -1,4 +1,4 @@
-package com.depromeet.watni.domain.accession;
+package com.depromeet.watni.domain.accession.constant;
 
 public enum AccessionStatus {
     ACCEPT,

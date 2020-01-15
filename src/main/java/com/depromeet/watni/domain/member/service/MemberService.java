@@ -1,5 +1,8 @@
-package com.depromeet.watni.domain.member;
+package com.depromeet.watni.domain.member.service;
 
+import com.depromeet.watni.domain.member.MemberDetail;
+import com.depromeet.watni.domain.member.repository.MemberRepository;
+import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,12 +24,7 @@ public class MemberService implements UserDetailsService {
     }
 
     public Member createMember(MemberRequestDto memberRequestDto) {
-        Member member = Member
-                .builder()
-                .email(memberRequestDto.getEmail())
-                .name(memberRequestDto.getName())
-                .password(memberRequestDto.getPassword())
-                .build();
+        Member member = Member.of(memberRequestDto);
         member = memberRepository.save(member);
         return member;
     }

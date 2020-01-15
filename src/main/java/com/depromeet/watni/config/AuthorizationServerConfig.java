@@ -1,6 +1,6 @@
 package com.depromeet.watni.config;
 
-import com.depromeet.watni.domain.member.MemberService;
+import com.depromeet.watni.domain.member.service.MemberService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

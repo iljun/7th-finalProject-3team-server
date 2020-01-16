@@ -4,6 +4,7 @@ jdk:
 sudo: required
 services:
   - docker
+  - redis-server
 env:
   - TAG="$(git rev-parse --short HEAD)"
 notifications:

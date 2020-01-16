@@ -2,11 +2,8 @@ package com.depromeet.watni.domain.manager.domain;
 
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.group.domain.Group;
-<<<<<<< HEAD
-import lombok.*;
-=======
 import com.depromeet.watni.domain.member.domain.Member;
->>>>>>> add domain relationship
+import lombok.*;
 
 import javax.persistence.*;
 

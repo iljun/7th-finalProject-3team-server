@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class ManagerDto {
-	private Long groupId;
-	private Long memberId;
+	private long groupId;
+	private long managerId;
 }

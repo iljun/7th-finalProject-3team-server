@@ -1,6 +1,8 @@
 package com.depromeet.watni.domain.member;
 
+import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.member.domain.Member;
+import com.depromeet.watni.exception.BadRequestException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -73,5 +75,13 @@ public class MemberDetail implements UserDetails {
 
     public String getName() {
         return this.name;
+    }
+
+    public void isAdministrator(Group group) {
+        group.getManagers()
+                .stream()
+                .filter(m -> m.getManagerId() == this.getMemberId())
+                .findAny()
+                .orElseThrow(() -> new BadRequestException("NOT ADMINISTRATOR"));
     }
 }

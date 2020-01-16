@@ -50,5 +50,6 @@ public class Group {
     public GroupResponseDto toResponseDto() {
     	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).build();
     }
+    
     // TODO createdAt, modifiedAt
 }

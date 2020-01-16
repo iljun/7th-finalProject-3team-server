@@ -1,7 +1,6 @@
 package com.depromeet.watni.domain.attendance.domain;
 
 import com.depromeet.watni.base.BaseEntity;
-import com.depromeet.watni.domain.attendance.constant.AttendanceType;
 import com.depromeet.watni.domain.conference.domain.Conference;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "attendance")
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name = "attendance_type")
+@DiscriminatorColumn(name = "type")
 @Entity
 public abstract class BaseAttendance extends BaseEntity {
 
@@ -20,10 +19,6 @@ public abstract class BaseAttendance extends BaseEntity {
 
     @Column(name = "member_id")
     private long memberId;
-
-    @Column(name = "attenance_type")
-    @Enumerated(value = EnumType.STRING)
-    private AttendanceType attendanceType;
 
     @Column(name = "attendance_at")
     private LocalDateTime attendanceAt;

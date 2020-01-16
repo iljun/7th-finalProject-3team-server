@@ -4,6 +4,11 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncrptor
+aws:
+  access-key: ENC(wuAWX4jIaTnaAVnU0Xsy/jWWluZWeRAViyIhvweRRiI=)
+  secret-key: ENC(TrP3UCBzlyMv9alS0D7KJRB6Sxv/wb/KMEAPFEZg2C1F/mO6eacUtaBCWxito6RARlCrcyK9+9w=)
+  region: ap-northeast-2
+  bucket-name: watni-resources
 ---
 spring:
   profiles: local

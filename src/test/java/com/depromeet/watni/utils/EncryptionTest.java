@@ -20,7 +20,7 @@ public class EncryptionTest {
         pbeEnc.setAlgorithm("PBEWithMD5AndDES");
         pbeEnc.setPassword(System.getProperty("encryptionKey"));
 
-        String enc = pbeEnc.encrypt("D96pymq8QwpYXhvL");
+        String enc = pbeEnc.encrypt("");
         log.info("enc = " + enc);
     }
 }

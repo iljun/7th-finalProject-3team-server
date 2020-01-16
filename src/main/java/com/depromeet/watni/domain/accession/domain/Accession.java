@@ -7,7 +7,6 @@ import com.depromeet.watni.domain.accession.dto.AccessionResponseDto;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.member.Member;
 import lombok.*;
-
 import javax.persistence.*;
 
 @Table(name = "accession")
@@ -31,12 +30,12 @@ public class Accession extends BaseEntity {
 	@Enumerated(value = EnumType.STRING)
 	private AccessionStatus accessionStatus;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id")
+	@OneToOne
+	@JoinColumn(name = "member_id", nullable = false)
 	private Member member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "group_id")
+	@JoinColumn(name = "group_id", nullable = false)
 	private Group group;
 
 
@@ -44,6 +43,4 @@ public class Accession extends BaseEntity {
 		return AccessionResponseDto.builder().id(id).accessionType(accessionType).accessionStatus(accessionStatus)
 				.member(member).group(group).build();
 	}
-
-	// TODO createdAt, modifiedAt
 }

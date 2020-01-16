@@ -2,7 +2,11 @@ package com.depromeet.watni.domain.manager.domain;
 
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.group.domain.Group;
+<<<<<<< HEAD
 import lombok.*;
+=======
+import com.depromeet.watni.domain.member.domain.Member;
+>>>>>>> add domain relationship
 
 import javax.persistence.*;
 
@@ -19,10 +23,11 @@ public class Manager extends BaseEntity {
     @Column(name = "manager_id")
     private long managerId;
 
-    @Column(name = "member_id")
-    private long memberId;
+    @OneToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 }

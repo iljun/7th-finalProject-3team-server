@@ -1,6 +1,7 @@
 package com.depromeet.watni.domain.participationUser.domain;
 
 import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.member.domain.Member;
 
 import javax.persistence.*;
@@ -14,7 +15,11 @@ public class ParticipationUser extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long participationUserId;
 
-    @OneToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
 }

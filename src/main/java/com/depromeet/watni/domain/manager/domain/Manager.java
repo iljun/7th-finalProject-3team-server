@@ -20,8 +20,8 @@ public class Manager extends BaseEntity {
     @Column(name = "manager_id")
     private long managerId;
 
-    @OneToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -35,8 +35,9 @@ public class ManagerService {
         return managerRepository.save(manager);
     }
 
-    public void deleteManager (Group group, long managerId) {
-        Manager manager = managerRepository.findOneByGroupAndMemberId(group, managerId).orElseThrow(() -> new NotFoundException("NOT FOUND MANAGER"));
+    public void deleteManager (Group group, Member member) {
+        Manager manager = managerRepository.findOneByGroupAndMember(group, member)
+                .orElseThrow(() -> new NotFoundException("NOT FOUND MANAGER"));
         manager.isDeleted();
         managerRepository.save(manager);
     }

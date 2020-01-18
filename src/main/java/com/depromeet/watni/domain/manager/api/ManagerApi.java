@@ -56,7 +56,8 @@ public class ManagerApi {
                                         @AuthenticationPrincipal MemberDetail memberDetail) {
         Group group = groupService.selectGroupByGroupId(groupId);
         memberDetail.isAdministrator(group);
-        managerService.deleteManager(group, managerId);
+        Member member = memberService.selectByMemberId(memberDetail.getMemberId());
+        managerService.deleteManager(group, member);
         return ResponseEntity.accepted().build();
     }
 

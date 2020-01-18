@@ -1,14 +1,11 @@
 package com.depromeet.watni.domain.groupcode;
 
-import org.springframework.stereotype.Service;
-
-import com.depromeet.watni.domain.group.Group;
-import com.depromeet.watni.domain.group.GroupRepository;
-import com.depromeet.watni.domain.group.GroupService;
+import com.depromeet.watni.domain.group.domain.Group;
+import com.depromeet.watni.domain.group.repository.GroupRepository;
 import com.depromeet.watni.exception.BadRequestException;
 import com.depromeet.watni.exception.NotFoundException;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

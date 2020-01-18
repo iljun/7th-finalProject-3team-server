@@ -29,7 +29,8 @@ public class Group extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    // TODO append data
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "group")
     private List<Conference> conferences = new ArrayList<>();

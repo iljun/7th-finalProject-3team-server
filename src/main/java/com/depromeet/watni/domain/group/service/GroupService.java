@@ -26,4 +26,8 @@ public class GroupService {
     public Group getGroup(Long groupId) {
         return groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException("NOT FOUND GROUP"));
     }
+
+    public Group update(Group group) {
+        return groupRepository.save(group);
+    }
 }

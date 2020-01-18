@@ -2,9 +2,12 @@ package com.depromeet.watni.domain.group.domain;
 
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.accession.domain.Accession;
+import com.depromeet.watni.domain.apply.domain.BaseApply;
 import com.depromeet.watni.domain.conference.domain.Conference;
 import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.domain.manager.domain.Manager;
+import com.depromeet.watni.domain.member.MemberDetail;
+import com.depromeet.watni.exception.BadRequestException;
 import lombok.*;
 import com.depromeet.watni.domain.participationUser.domain.ParticipationUser;
 
@@ -44,8 +47,20 @@ public class Group extends BaseEntity {
     @OneToMany(mappedBy = "group")
     private List<ParticipationUser> participationUsers = new ArrayList<>();
 
+    @OneToOne(mappedBy = "group")
+    @Setter
+    private BaseApply baseApply;
+
     //map struct
     public GroupResponseDto toResponseDto() {
     	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).build();
+    }
+
+    public void isAdministrator(MemberDetail memberDetail) {
+        managers
+                .stream()
+                .filter(m -> m.getManagerId() == memberDetail.getMemberId())
+                .findAny()
+                .orElseThrow(() -> new BadRequestException("NOT ADMINISTRATOR"));
     }
 }

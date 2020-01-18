@@ -44,7 +44,7 @@ public class ManagerApi {
                                           @RequestBody ManagerDto managerDto,
                                           @AuthenticationPrincipal MemberDetail memberDetail) {
         Group group = groupService.selectGroupByGroupId(groupId);
-        memberDetail.isAdministrator(group);
+        group.isAdministrator(memberDetail);
         Member member = memberService.selectByMemberId(managerDto.getManagerId());
         Manager manger = managerService.registerManager(group, member);
         return ResponseEntity.ok(MANAGER_MAPPER.convert(manger, group));
@@ -55,7 +55,7 @@ public class ManagerApi {
                                         @PathVariable long managerId,
                                         @AuthenticationPrincipal MemberDetail memberDetail) {
         Group group = groupService.selectGroupByGroupId(groupId);
-        memberDetail.isAdministrator(group);
+        group.isAdministrator(memberDetail);
         Member member = memberService.selectByMemberId(memberDetail.getMemberId());
         managerService.deleteManager(group, member);
         return ResponseEntity.accepted().build();

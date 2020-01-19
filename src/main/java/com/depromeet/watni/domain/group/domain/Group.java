@@ -35,12 +35,15 @@ public class Group extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "group")
+    @Builder.Default
     private List<Conference> conferences = new ArrayList<>();
 
     @OneToMany(mappedBy = "group")
+    @Builder.Default
     private List<Manager> managers = new ArrayList<>();
 
     @OneToMany(mappedBy = "group")
+    @Builder.Default
     private List<Accession> accessions = new ArrayList<>();
 
     @OneToOne(mappedBy = "group")

@@ -32,8 +32,9 @@ public class Member extends BaseEntity {
     private String password;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Manager> managers = new ArrayList<>();
-    
+
     public static Member of(MemberRequestDto memberRequestDto) {
         return Member
                 .builder()

@@ -1,6 +1,7 @@
 package com.depromeet.watni.domain.group.domain;
 
 import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.accession.constant.AccessionStatus;
 import com.depromeet.watni.domain.accession.domain.Accession;
 import com.depromeet.watni.domain.apply.domain.BaseApply;
 import com.depromeet.watni.domain.conference.domain.Conference;
@@ -13,6 +14,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Table(name = "groups")
 @Entity
@@ -61,5 +63,28 @@ public class Group extends BaseEntity {
                 .filter(m -> m.getManagerId() == memberDetail.getMemberId())
                 .findAny()
                 .orElseThrow(() -> new BadRequestException("NOT ADMINISTRATOR"));
+    }
+
+    public void isAccessionUser(MemberDetail memberDetail) {
+        Optional<Manager> manager = managers
+                .stream()
+                .filter(m -> m.getManagerId() == memberDetail.getMemberId())
+                .findAny();
+        Optional<Accession> accession =accessions
+                .stream()
+                .filter(a -> a.getAccessionStatus() == AccessionStatus.ACCEPT)
+                .filter(a -> a.getMember().getMemberId() == memberDetail.getMemberId())
+                .findAny();
+        if (!manager.isPresent() && !accession.isPresent()) {
+            throw new BadRequestException("THIS USER IS NOT ACCESSIONS");
+        }
+    }
+
+    public Conference containsConference(long conferenceId) {
+        Conference conference = conferences.stream()
+                .filter(c -> c.getConferenceId() == conferenceId)
+                .findAny()
+                .orElseThrow(() -> new BadRequestException("NOT FOUND CONFERENCE"));
+        return conference;
     }
 }

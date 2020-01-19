@@ -3,7 +3,6 @@ package com.depromeet.watni.domain.member.domain;
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.manager.domain.Manager;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
-import com.depromeet.watni.domain.participationUser.domain.ParticipationUser;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,10 +33,7 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<Manager> managers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member")
-    private List<ParticipationUser> participationUsers = new ArrayList<>();
-
+    
     public static Member of(MemberRequestDto memberRequestDto) {
         return Member
                 .builder()

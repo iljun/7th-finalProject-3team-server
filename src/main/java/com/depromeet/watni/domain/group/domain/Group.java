@@ -9,7 +9,6 @@ import com.depromeet.watni.domain.manager.domain.Manager;
 import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.exception.BadRequestException;
 import lombok.*;
-import com.depromeet.watni.domain.participationUser.domain.ParticipationUser;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -43,9 +42,6 @@ public class Group extends BaseEntity {
 
     @OneToMany(mappedBy = "group")
     private List<Accession> accessions = new ArrayList<>();
-
-    @OneToMany(mappedBy = "group")
-    private List<ParticipationUser> participationUsers = new ArrayList<>();
 
     @OneToOne(mappedBy = "group")
     @Setter

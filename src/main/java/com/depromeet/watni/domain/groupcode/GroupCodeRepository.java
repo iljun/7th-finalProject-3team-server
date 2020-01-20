@@ -1,10 +1,9 @@
 package com.depromeet.watni.domain.groupcode;
 
-import java.util.Optional;
-
+import com.depromeet.watni.domain.group.domain.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.depromeet.watni.domain.group.Group;
+import java.util.Optional;
 
 public interface GroupCodeRepository extends JpaRepository<GroupCode, Long> {
 	Optional<GroupCode> findOneByCode(String code);

@@ -9,6 +9,7 @@ import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.exception.BadRequestException;
+import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Slf4j
 public class ConferenceApi {
     private final static ConferenceMapper CONFERENCE_MAPPER = Mappers.getMapper(ConferenceMapper.class);
 
@@ -48,12 +50,16 @@ public class ConferenceApi {
                                         @AuthenticationPrincipal MemberDetail memberDetail) {
         Group group = groupService.selectGroupByGroupId(groupId);
         group.isAccessionUser(memberDetail);
-        Conference conference = group.getConferences()
+        if (group.getConferences().isEmpty()) {
+            throw new BadRequestException("NOT FOUND CONFERENCE");
+        }
+        ConferenceResponseDto responseDto = group.getConferences()
                 .stream()
                 .filter(c -> c.getConferenceId() == conferenceId)
                 .findFirst()
+                .map(c -> CONFERENCE_MAPPER.converter(c))
                 .orElseThrow(() -> new BadRequestException("NOT FOUND CONFERENCE"));
-        return ResponseEntity.ok(CONFERENCE_MAPPER.converter(conference));
+        return ResponseEntity.ok(responseDto);
 
     }
 

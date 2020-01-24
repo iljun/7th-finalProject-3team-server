@@ -60,7 +60,7 @@ public class Group extends BaseEntity {
     public void isAdministrator(MemberDetail memberDetail) {
         managers
                 .stream()
-                .filter(m -> m.getManagerId() == memberDetail.getMemberId())
+                .filter(m -> m.getMember().getMemberId() == memberDetail.getMemberId())
                 .findAny()
                 .orElseThrow(() -> new BadRequestException("NOT ADMINISTRATOR"));
     }
@@ -68,9 +68,9 @@ public class Group extends BaseEntity {
     public void isAccessionUser(MemberDetail memberDetail) {
         Optional<Manager> manager = managers
                 .stream()
-                .filter(m -> m.getManagerId() == memberDetail.getMemberId())
+                .filter(m -> m.getMember().getMemberId() == memberDetail.getMemberId())
                 .findAny();
-        Optional<Accession> accession =accessions
+        Optional<Accession> accession = accessions
                 .stream()
                 .filter(a -> a.getAccessionStatus() == AccessionStatus.ACCEPT)
                 .filter(a -> a.getMember().getMemberId() == memberDetail.getMemberId())

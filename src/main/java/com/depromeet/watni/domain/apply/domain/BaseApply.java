@@ -2,6 +2,7 @@ package com.depromeet.watni.domain.apply.domain;
 
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.group.domain.Group;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
         discriminatorType = DiscriminatorType.STRING
 )
 @Entity
+@Data
 public abstract class BaseApply extends BaseEntity {
 
     @Id

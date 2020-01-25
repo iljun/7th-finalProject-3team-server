@@ -29,13 +29,10 @@ public class ApplyApi {
     public ResponseEntity generateApply(@PathVariable long groupId,
                                         @AuthenticationPrincipal MemberDetail memberDetail,
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
-        // TODO refactoring
         Group group = groupService.selectGroupByGroupId(groupId);
         group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
-        BaseApply baseApply = applyService.generateApply(baseApplyRequestDto);
-        group.setBaseApply(baseApply);
-        groupService.update(group);
-        return ResponseEntity.ok().build();
+        BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
+        return ResponseEntity.ok().body(baseApply);
     }
 }

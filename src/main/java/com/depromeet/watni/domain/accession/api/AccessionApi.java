@@ -5,6 +5,7 @@ import com.depromeet.watni.domain.accession.dto.AccessionDto;
 import com.depromeet.watni.domain.accession.dto.AccessionResponseDto;
 import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class AccessionApi {
     }
 
     @PostMapping("/api/group/{groupId}/accession")
-    public List<AccessionResponseDto> accessGroup(@PathVariable Long groupId, @RequestBody AccessionDto accessionDto) {
+    public ResponseEntity accessGroup(@PathVariable Long groupId, @RequestBody AccessionDto accessionDto) {
         groupCodeService.checkGroupCode(groupId, accessionDto.getCode());
         List<Accession> accessions= accessionService.accessGroupByCode(groupId, accessionDto.getMemberIdList());
         // group exception
@@ -35,6 +36,6 @@ public class AccessionApi {
         for (Accession accession : accessions) {
             result.add(accession.toResponseDto());
         }
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 }

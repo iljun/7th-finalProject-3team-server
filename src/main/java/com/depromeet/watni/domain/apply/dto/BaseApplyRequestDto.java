@@ -6,4 +6,5 @@ import lombok.Getter;
 @Getter
 public class BaseApplyRequestDto {
     private ApplyType applyType;
+    private String content;
 }

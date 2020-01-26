@@ -9,10 +9,7 @@ import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.member.MemberDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ApplyApi {
@@ -27,12 +24,22 @@ public class ApplyApi {
 
     @PostMapping("/api/group/{groupId}/apply-way")
     public ResponseEntity generateApply(@PathVariable long groupId,
-                                        @AuthenticationPrincipal MemberDetail memberDetail,
+
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
-        group.isAdministrator(memberDetail);
+        //group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
+        return ResponseEntity.ok().body(baseApply);
+    }
+    @GetMapping("/api/group/{groupId}/apply-way")
+    public ResponseEntity getApply(@PathVariable long groupId,
+
+                                        @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
+        Group group = groupService.selectGroupByGroupId(groupId);
+        //group.isAdministrator(memberDetail);
+        ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
+        BaseApply baseApply = applyService.getApply(baseApplyRequestDto,group);
         return ResponseEntity.ok().body(baseApply);
     }
 }

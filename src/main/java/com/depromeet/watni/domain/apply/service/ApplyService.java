@@ -7,4 +7,6 @@ import com.depromeet.watni.domain.group.domain.Group;
 public interface ApplyService{
 
     BaseApply generateApply(BaseApplyRequestDto baseApplyRequestDto, Group group);
+    BaseApply getApply(BaseApplyRequestDto baseApplyRequestDto, Group group);
+    void checkApply(BaseApplyRequestDto baseApplyRequestDto, Group group);
 }

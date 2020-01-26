@@ -1,8 +1,11 @@
 package com.depromeet.watni.domain.apply.domain;
 
 import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.apply.constant.ApplyType;
 import com.depromeet.watni.domain.group.domain.Group;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -13,7 +16,8 @@ import javax.persistence.*;
         discriminatorType = DiscriminatorType.STRING
 )
 @Entity
-@Data
+@Getter
+@Setter
 public abstract class BaseApply extends BaseEntity {
 
     @Id
@@ -24,4 +28,5 @@ public abstract class BaseApply extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "group_id")
     private Group group;
+
 }

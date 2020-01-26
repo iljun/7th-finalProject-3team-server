@@ -48,13 +48,13 @@ public class Group extends BaseEntity {
     @Builder.Default
     private List<Accession> accessions = new ArrayList<>();
 
-    @OneToOne(mappedBy = "group")
-    @Setter
-    private BaseApply baseApply;
+//    @OneToOne(mappedBy = "group")
+//    @Setter
+//    private BaseApply baseApply;
 
     //map struct
     public GroupResponseDto toResponseDto() {
-    	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).build();
+    	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).accessions(this.accessions).build();
     }
 
     public void isAdministrator(MemberDetail memberDetail) {

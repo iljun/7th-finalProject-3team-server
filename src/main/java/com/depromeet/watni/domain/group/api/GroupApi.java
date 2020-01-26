@@ -10,6 +10,8 @@ import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.groupcode.GroupCode;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,21 +32,20 @@ public class GroupApi {
 
 
     @GetMapping("/api/groups/{groupId}")
-    public GroupResponseDto getGroup(@PathVariable Long groupId) {
-        return groupService.getGroup(groupId).toResponseDto();
+    public ResponseEntity getGroup(@PathVariable Long groupId) {
+        GroupResponseDto result = groupService.getGroup(groupId).toResponseDto();
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/api/groups")
-    public GroupResponseDto createGroup(@RequestBody GroupDto groupDto) {
+    public ResponseEntity createGroup(@RequestBody GroupDto groupDto) {
         Group group = groupService.createGroup(groupDto);
-        GroupCode groupCode = groupCodeService.createGroupCode(group.getGroupId(), groupDto.getCode());
         GroupResponseDto result = group.toResponseDto();
-        result.setCode(groupCode.getCode());
-        return result;
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @PostMapping("/api/groups/access")
-    public List<AccessionResponseDto> accessGroupByCode(@RequestBody AccessGroupRequestDto accessGroupRequestDto) {
+    public ResponseEntity accessGroupByCode(@RequestBody AccessGroupRequestDto accessGroupRequestDto) {
         groupCodeService.checkGroupCode(accessGroupRequestDto.getGroupId(), accessGroupRequestDto.getAccessCode());
 
         List<Accession> accessions = accessionService.accessGroupByCode(accessGroupRequestDto.getGroupId(),
@@ -54,6 +55,6 @@ public class GroupApi {
         for (Accession accession : accessions) {
             result.add(accession.toResponseDto());
         }
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 }

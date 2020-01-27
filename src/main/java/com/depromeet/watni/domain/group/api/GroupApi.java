@@ -10,6 +10,10 @@ import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.groupcode.GroupCode;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
+import com.depromeet.watni.domain.member.MemberDetail;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,31 +33,38 @@ public class GroupApi {
     }
 
 
-    @GetMapping("/api/groups/{groupId}")
-    public GroupResponseDto getGroup(@PathVariable Long groupId) {
-        return groupService.getGroup(groupId).toResponseDto();
+    @GetMapping("/api/group/{groupId}")
+    public ResponseEntity getGroup(@PathVariable Long groupId) {
+        GroupResponseDto result = groupService.getGroup(groupId).toResponseDto();
+        return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/api/groups")
-    public GroupResponseDto createGroup(@RequestBody GroupDto groupDto) {
+    @PostMapping("/api/group")
+    public ResponseEntity createGroup(@RequestBody GroupDto groupDto) {
         Group group = groupService.createGroup(groupDto);
-        GroupCode groupCode = groupCodeService.createGroupCode(group.getGroupId(), groupDto.getCode());
         GroupResponseDto result = group.toResponseDto();
-        result.setCode(groupCode.getCode());
-        return result;
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PostMapping("/api/groups/access")
-    public List<AccessionResponseDto> accessGroupByCode(@RequestBody AccessGroupRequestDto accessGroupRequestDto) {
-        groupCodeService.checkGroupCode(accessGroupRequestDto.getGroupId(), accessGroupRequestDto.getAccessCode());
-
-        List<Accession> accessions = accessionService.accessGroupByCode(accessGroupRequestDto.getGroupId(),
-                accessGroupRequestDto.getMemberIdList());
-
-        List<AccessionResponseDto> result = new ArrayList<AccessionResponseDto>();
-        for (Accession accession : accessions) {
-            result.add(accession.toResponseDto());
-        }
-        return result;
+    @DeleteMapping("api/group/{groupId}")
+    public ResponseEntity deleteGroup(@PathVariable Long groupId, @AuthenticationPrincipal MemberDetail memberDetail){
+        Group group = groupService.selectGroupByGroupId(groupId);
+        group.isAdministrator(memberDetail);
+        groupService.delete(group);
+        return ResponseEntity.accepted().build();
     }
+
+//    @PostMapping("/api/groups/access")
+//    public ResponseEntity accessGroupByCode(@RequestBody AccessGroupRequestDto accessGroupRequestDto) {
+//        groupCodeService.checkGroupCode(accessGroupRequestDto.getGroupId(), accessGroupRequestDto.getAccessCode());
+//
+//        List<Accession> accessions = accessionService.accessGroup(accessGroupRequestDto.getGroupId(),
+//                accessGroupRequestDto.getMemberIdList());
+//
+//        List<AccessionResponseDto> result = new ArrayList<AccessionResponseDto>();
+//        for (Accession accession : accessions) {
+//            result.add(accession.toResponseDto());
+//        }
+//        return ResponseEntity.ok().body(result);
+//    }
 }

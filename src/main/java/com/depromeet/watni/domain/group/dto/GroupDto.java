@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GroupDto {
 	private String groupName;
-	private String code;
+	private String description;
 }

@@ -33,7 +33,7 @@ public class ConferenceServiceTest {
         ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
-                .code("test")
+                .description("test")
                 .groupName("testGroup")
                 .build();
         Group group = groupService.createGroup(groupDto);
@@ -47,7 +47,7 @@ public class ConferenceServiceTest {
         ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
-                .code("test")
+                .description("test")
                 .groupName("testGroup")
                 .build();
         Group group = groupService.createGroup(groupDto);
@@ -63,7 +63,7 @@ public class ConferenceServiceTest {
         ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
-                .code("test")
+                .description("test")
                 .groupName("testGroup")
                 .build();
         Group group = groupService.createGroup(groupDto);

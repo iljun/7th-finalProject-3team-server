@@ -68,6 +68,42 @@ include::{snippets}/POST_member/request-body.adoc[]
 include::{snippets}/POST_member/http-response.adoc[]
 
 
+== Group
+
+=== search Group API
+
+==== Request
+
+include::{snippets}/group_search/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/group_search/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/group_search/http-response.adoc[]
+
+
+=== create Group API
+
+=== Create Group API
+
+==== Request
+
+include::{snippets}/group_create/http-request.adoc[]
+
+==== Request Body
+
+include::{snippets}/group_create/request-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/group_create/response-fields.adoc[]
+
+==== Response
+
+include::{snippets}/group_create/http-response.adoc[]
 
 == Conference API
 

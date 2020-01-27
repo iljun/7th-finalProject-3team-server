@@ -19,7 +19,7 @@ public class GroupService {
     }
 
     public Group createGroup(GroupDto groupDto) {
-        Group group = Group.builder().name(groupDto.getGroupName()).build();
+        Group group = Group.builder().name(groupDto.getGroupName()).description(groupDto.getDescription()).build();
         return groupRepository.save(group);
     }
 
@@ -29,5 +29,9 @@ public class GroupService {
 
     public Group update(Group group) {
         return groupRepository.save(group);
+    }
+
+    public void delete(Group group){
+        groupRepository.delete(group);
     }
 }

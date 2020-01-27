@@ -6,10 +6,7 @@ import com.depromeet.watni.domain.accession.dto.AccessionResponseDto;
 import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +23,8 @@ public class AccessionApi {
 
     @PostMapping("/api/group/{groupId}/accession")
     public ResponseEntity accessGroup(@PathVariable Long groupId, @RequestBody AccessionDto accessionDto) {
-        groupCodeService.checkGroupCode(groupId, accessionDto.getCode());
-        List<Accession> accessions= accessionService.accessGroupByCode(groupId, accessionDto.getMemberIdList());
+
+        List<Accession> accessions= accessionService.accessGroup(groupId, accessionDto.getMemberIdList());
         // group exception
         // group -> code exception
         // code / auto -> create Accession
@@ -37,5 +34,11 @@ public class AccessionApi {
             result.add(accession.toResponseDto());
         }
         return ResponseEntity.ok().body(result);
+    }
+
+    @DeleteMapping("/api/group/{groupId}/accession/member/{memberId}")
+    public ResponseEntity deleteAccess(@PathVariable Long groupId,@PathVariable Long memberId){
+        accessionService.deleteAccess(groupId,memberId);
+        return ResponseEntity.accepted().build();
     }
 }

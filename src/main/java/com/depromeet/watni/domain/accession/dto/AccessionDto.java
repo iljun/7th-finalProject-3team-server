@@ -18,7 +18,5 @@ public class AccessionDto {
 
 	@NotNull
 	private List<Long> memberIdList;
-	
-	//optional
-	private String code;
+
 }

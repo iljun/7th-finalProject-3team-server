@@ -7,6 +7,7 @@ import com.depromeet.watni.domain.apply.service.ApplyServiceFactory;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.member.MemberDetail;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -24,22 +25,32 @@ public class ApplyApi {
 
     @PostMapping("/api/group/{groupId}/apply-way")
     public ResponseEntity generateApply(@PathVariable long groupId,
-
+                                        @AuthenticationPrincipal MemberDetail memberDetail,
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
-        //group.isAdministrator(memberDetail);
+        group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
-        return ResponseEntity.ok().body(baseApply);
+        return ResponseEntity.status(HttpStatus.CREATED).body(baseApply);
     }
     @GetMapping("/api/group/{groupId}/apply-way")
     public ResponseEntity getApply(@PathVariable long groupId,
 
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
-        //group.isAdministrator(memberDetail);
+        
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         BaseApply baseApply = applyService.getApply(baseApplyRequestDto,group);
         return ResponseEntity.ok().body(baseApply);
+    }
+    @GetMapping("/api/group/{groupId}/apply-way/check")
+    public ResponseEntity checkApply(@PathVariable long groupId,
+
+                                   @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
+        Group group = groupService.selectGroupByGroupId(groupId);
+        //group.isAdministrator(memberDetail);
+        ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
+        applyService.checkApply(baseApplyRequestDto,group);
+        return ResponseEntity.accepted().build();
     }
 }

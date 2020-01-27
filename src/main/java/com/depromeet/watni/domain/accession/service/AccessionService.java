@@ -8,6 +8,7 @@ import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.service.MemberService;
+import com.depromeet.watni.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,7 +29,7 @@ public class AccessionService {
     }
 
     @Transactional
-    public List<Accession> accessGroupByCode(Long groupId, List<Long> memberIdList) {
+    public List<Accession> accessGroup(Long groupId, List<Long> memberIdList) {
         Group group = groupService.getGroup(groupId);
         List<Accession> accesionList = new ArrayList<Accession>();
         for (Long memberId : memberIdList) {
@@ -39,4 +40,17 @@ public class AccessionService {
         }
         return accessionRepository.saveAll(accesionList);
     }
+
+    public void deleteAccess (Long accessId){
+        accessionRepository.findById(accessId).orElseThrow(()->new NotFoundException("NOT FOUND ACCESS INFO"));
+    }
+
+    @Transactional
+    public void deleteAccess (Long groupId,Long memberId){
+        Group group = groupService.getGroup(groupId);
+        Member member = memberService.selectByMemberId(memberId);
+        Accession accession = accessionRepository.findOneByGroupAndMember(group,member).orElseThrow(()->new NotFoundException("NOT FOUND ACCESS INFO"));
+        accessionRepository.delete(accession);
+    }
+
 }

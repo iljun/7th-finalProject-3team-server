@@ -1,19 +1,16 @@
 package com.depromeet.watni.config;
 
+import com.depromeet.watni.domain.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 @Configuration
 @Profile("local")
@@ -22,6 +19,10 @@ public class LocalAuthorizationServer extends AuthorizationServerConfigurerAdapt
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -38,22 +39,9 @@ public class LocalAuthorizationServer extends AuthorizationServerConfigurerAdapt
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
         endpoints
-                .tokenStore(new InMemoryTokenStore())
+                .tokenStore(new RedisTokenStore(this.redisConnectionFactory))
                 .authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService());
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-
-        UserDetails theUser = User.withUsername("test@naver.com")
-                .password("{noop}test").roles("USER").build();
-
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-
-        userDetailsManager.createUser(theUser);
-
-        return userDetailsManager;
+                .userDetailsService(memberService);
     }
 
 }

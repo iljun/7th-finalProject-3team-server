@@ -3,11 +3,13 @@ package com.depromeet.watni.domain.conference.dto;
 import com.depromeet.watni.domain.conference.domain.Conference;
 import com.depromeet.watni.domain.group.domain.Group;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
+@Data
 public class ConferenceRequestDto {
     public interface create{}
     public interface update{}

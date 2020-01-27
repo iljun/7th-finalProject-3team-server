@@ -1,10 +1,10 @@
 package com.depromeet.watni.domain.conference.dto;
 
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Setter
+@Data
 public class ConferenceResponseDto {
 
     private long conferenceId;
@@ -12,6 +12,8 @@ public class ConferenceResponseDto {
     private String name;
 
     private String description;
+
+    private String locationInfo;
 
     private LocalDateTime startAt;
 

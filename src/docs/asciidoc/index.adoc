@@ -66,3 +66,106 @@ include::{snippets}/POST_member/request-body.adoc[]
 ===== Response example
 
 include::{snippets}/POST_member/http-response.adoc[]
+
+
+
+== Conference API
+
+=== search conferences
+
+==== Request
+
+include::{snippets}/GET_CONFERENCES/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/GET_CONFERENCES/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_CONFERENCES/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/GET_CONFERENCES/http-response.adoc[]
+
+=== search conference
+
+==== Request
+
+include::{snippets}/GET_CONFERENCE/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/GET_CONFERENCE/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_CONFERENCE/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/GET_CONFERENCE/http-response.adoc[]
+
+=== create conference
+
+==== Request
+
+==== Request
+
+include::{snippets}/POST_CONFERENCE/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/POST_CONFERENCE/path-parameters.adoc[]
+
+==== Request Body
+
+include::{snippets}/POST_CONFERENCE/request-body.adoc[]
+
+==== Response Body
+
+include::{snippets}/POST_CONFERENCE/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/POST_CONFERENCE/http-response.adoc[]
+
+
+=== update Conference
+
+==== Request
+
+include::{snippets}/PATCH_CONFERENCE/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/PATCH_CONFERENCE/path-parameters.adoc[]
+
+==== Request Body
+
+include::{snippets}/PATCH_CONFERENCE/request-body.adoc[]
+
+==== Response Body
+
+include::{snippets}/PATCH_CONFERENCE/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/PATCH_CONFERENCE/http-response.adoc[]
+
+
+=== Delete Conference
+
+==== Request
+
+include::{snippets}/DELETE_CONFERENCE/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/DELETE_CONFERENCE/path-parameters.adoc[]
+
+==== Response Example
+
+include::{snippets}/DELETE_CONFERENCE/http-response.adoc[]
+

@@ -84,9 +84,6 @@ include::{snippets}/group_search/response-fields.adoc[]
 
 include::{snippets}/group_search/http-response.adoc[]
 
-
-=== create Group API
-
 === Create Group API
 
 ==== Request
@@ -104,6 +101,22 @@ include::{snippets}/group_create/response-fields.adoc[]
 ==== Response
 
 include::{snippets}/group_create/http-response.adoc[]
+
+== ApplyWay API
+
+=== Create Group Code
+
+==== Request
+
+include::{snippets}/POST_APPLY_WAY/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/POST_APPLY_WAY/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/POST_APPLY_WAY/http-response.adoc[]
 
 == Conference API
 

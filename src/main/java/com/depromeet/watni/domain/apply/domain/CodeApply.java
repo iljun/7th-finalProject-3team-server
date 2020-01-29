@@ -1,10 +1,8 @@
 package com.depromeet.watni.domain.apply.domain;
 
 import com.depromeet.watni.domain.apply.constant.ApplyType;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

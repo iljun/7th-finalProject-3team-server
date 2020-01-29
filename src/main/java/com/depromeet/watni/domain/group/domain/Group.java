@@ -20,7 +20,6 @@ import java.util.Optional;
 @Entity
 @Builder
 @Getter
-@ToString
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 @AllArgsConstructor(access=AccessLevel.PROTECTED)
 public class Group extends BaseEntity {
@@ -48,9 +47,9 @@ public class Group extends BaseEntity {
     @Builder.Default
     private List<Accession> accessions = new ArrayList<>();
 
-//    @OneToOne(mappedBy = "group")
-//    @Setter
-//    private BaseApply baseApply;
+    @OneToOne(mappedBy = "group")
+    @Setter
+    private BaseApply baseApply;
 
     //map struct
     public GroupResponseDto toResponseDto() {

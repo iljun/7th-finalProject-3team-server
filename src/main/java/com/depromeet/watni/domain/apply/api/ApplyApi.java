@@ -33,9 +33,9 @@ public class ApplyApi {
         BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
         return ResponseEntity.status(HttpStatus.CREATED).body(baseApply);
     }
+
     @GetMapping("/api/group/{groupId}/apply-way")
     public ResponseEntity getApply(@PathVariable long groupId,
-
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
         
@@ -43,6 +43,7 @@ public class ApplyApi {
         BaseApply baseApply = applyService.getApply(baseApplyRequestDto,group);
         return ResponseEntity.ok().body(baseApply);
     }
+
     @GetMapping("/api/group/{groupId}/apply-way/check")
     public ResponseEntity checkApply(@PathVariable long groupId,
 

@@ -72,6 +72,10 @@ include::{snippets}/POST_member/http-response.adoc[]
 
 === search Group API
 
+==== Request Header
+
+include::{snippets}/group_search/request-headers.adoc[]
+
 ==== Request
 
 include::{snippets}/group_search/http-request.adoc[]
@@ -85,6 +89,10 @@ include::{snippets}/group_search/response-fields.adoc[]
 include::{snippets}/group_search/http-response.adoc[]
 
 === Create Group API
+
+==== Request Header
+
+include::{snippets}/group_create/request-headers.adoc[]
 
 ==== Request
 
@@ -106,6 +114,10 @@ include::{snippets}/group_create/http-response.adoc[]
 
 === Create Group Code
 
+==== Request Header
+
+include::{snippets}/POST_APPLY_WAY/request-headers.adoc[]
+
 ==== Request
 
 include::{snippets}/POST_APPLY_WAY/http-request.adoc[]
@@ -121,6 +133,10 @@ include::{snippets}/POST_APPLY_WAY/http-response.adoc[]
 == Conference API
 
 === search conferences
+
+==== Request Header
+
+include::{snippets}/GET_CONFERENCES/request-headers.adoc[]
 
 ==== Request
 
@@ -140,6 +156,10 @@ include::{snippets}/GET_CONFERENCES/http-response.adoc[]
 
 === search conference
 
+==== Request Header
+
+include::{snippets}/GET_CONFERENCE/request-headers.adoc[]
+
 ==== Request
 
 include::{snippets}/GET_CONFERENCE/http-request.adoc[]
@@ -158,7 +178,9 @@ include::{snippets}/GET_CONFERENCE/http-response.adoc[]
 
 === create conference
 
-==== Request
+==== Request Header
+
+include::{snippets}/POST_CONFERENCE/request-headers.adoc[]
 
 ==== Request
 
@@ -183,6 +205,10 @@ include::{snippets}/POST_CONFERENCE/http-response.adoc[]
 
 === update Conference
 
+==== Request Header
+
+include::{snippets}/PATCH_CONFERENCE/request-headers.adoc[]
+
 ==== Request
 
 include::{snippets}/PATCH_CONFERENCE/http-request.adoc[]
@@ -206,6 +232,10 @@ include::{snippets}/PATCH_CONFERENCE/http-response.adoc[]
 
 === Delete Conference
 
+==== Request Header
+
+include::{snippets}/DELETE_CONFERENCE/request-headers.adoc[]
+
 ==== Request
 
 include::{snippets}/DELETE_CONFERENCE/http-request.adoc[]
@@ -218,3 +248,30 @@ include::{snippets}/DELETE_CONFERENCE/path-parameters.adoc[]
 
 include::{snippets}/DELETE_CONFERENCE/http-response.adoc[]
 
+== Attendance
+
+=== create Attendance
+
+==== Request Header
+
+include::{snippets}/POST_photoAttendance/request-headers.adoc[]
+
+==== Path Variable
+
+include::{snippets}/POST_photoAttendance/path-parameters.adoc[]
+
+==== Request Field
+
+include::{snippets}/POST_photoAttendance/request-body.adoc[]
+
+==== Request Example
+
+include::{snippets}/POST_photoAttendance/http-request.adoc[]
+
+==== Response Field
+
+include::{snippets}/POST_photoAttendance/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/POST_photoAttendance/response-body.adoc[]

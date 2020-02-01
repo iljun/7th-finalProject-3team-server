@@ -3,6 +3,7 @@ package com.depromeet.watni.domain.conference.domain;
 import com.depromeet.watni.base.BaseEntity;
 import com.depromeet.watni.domain.attendance.domain.BaseAttendance;
 import com.depromeet.watni.domain.group.domain.Group;
+import com.depromeet.watni.exception.BadRequestException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,4 +47,10 @@ public class Conference extends BaseEntity {
     @Column(name = "end_at")
     private LocalDateTime endAt;
 
+    public void availableAttendance() {
+        LocalDateTime now = LocalDateTime.now();
+        if (!this.startAt.isBefore(now) || !this.endAt.isAfter(now)) {
+            throw new BadRequestException("Attendance check is unavailable");
+        }
+    }
 }

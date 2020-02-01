@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -76,6 +78,9 @@ public class ApplyDocuments {
                 .andDo(document("POST_APPLY_WAY",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id")
                         ),

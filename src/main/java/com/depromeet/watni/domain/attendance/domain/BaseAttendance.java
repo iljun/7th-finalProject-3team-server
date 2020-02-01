@@ -1,7 +1,13 @@
 package com.depromeet.watni.domain.attendance.domain;
 
 import com.depromeet.watni.base.BaseEntity;
+import com.depromeet.watni.domain.attendance.constant.AttendanceStatus;
 import com.depromeet.watni.domain.conference.domain.Conference;
+import com.depromeet.watni.domain.member.domain.Member;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +16,9 @@ import java.time.LocalDateTime;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type")
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Getter
 public abstract class BaseAttendance extends BaseEntity {
 
     @Id
@@ -17,8 +26,13 @@ public abstract class BaseAttendance extends BaseEntity {
     @Column(name = "attendance_id")
     private long id;
 
-    @Column(name = "member_id")
-    private long memberId;
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @Column(name = "attendance_status")
+    @Enumerated(value = EnumType.STRING)
+    private AttendanceStatus attendanceStatus;
 
     @Column(name = "attendance_at")
     private LocalDateTime attendanceAt;
@@ -27,10 +41,4 @@ public abstract class BaseAttendance extends BaseEntity {
     @JoinColumn(name = "conference_id")
     private Conference conference;
 
-    // TODO 논의 거리 출석체크를 시간 기반으로 진행할지 on/off로 기록할지
-    @Column(name = "start_at")
-    private LocalDateTime startAt;
-
-    @Column(name = "end_at")
-    private LocalDateTime endAt;
 }

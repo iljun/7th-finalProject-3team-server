@@ -4,5 +4,6 @@ public enum AttendanceType {
     PUBLIC_URL,
     URL,
     LOCATION,
-    WIFI;
+    WIFI,
+    PHOTO;
 }

@@ -28,6 +28,8 @@ import java.time.LocalDateTime;
 
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -81,6 +83,9 @@ public class ConferenceDocuments {
                 .andDo(document("GET_CONFERENCES",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id")
                         ),
@@ -108,6 +113,9 @@ public class ConferenceDocuments {
                 .andDo(document("GET_CONFERENCE",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id"),
                                 parameterWithName("conferenceId").description("conference Id")
@@ -147,6 +155,9 @@ public class ConferenceDocuments {
                 .andDo(document("POST_CONFERENCE",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id")
                         ),
@@ -179,6 +190,9 @@ public class ConferenceDocuments {
                 .andDo(document("PATCH_CONFERENCE",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id"),
                                 parameterWithName("conferenceId").description("conference Id")
@@ -208,6 +222,9 @@ public class ConferenceDocuments {
                 .andDo(document("DELETE_CONFERENCE",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id"),
                                 parameterWithName("conferenceId").description("conference Id")

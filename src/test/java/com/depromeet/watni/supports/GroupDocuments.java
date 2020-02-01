@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
@@ -53,6 +55,9 @@ public class GroupDocuments {
 		.andDo(document("group_create",
 				getDocumentRequest(),
 				getDocumentResponse(),
+				requestHeaders(
+						headerWithName("Authorization").description("user accessToken")
+				),
 				requestFields(
 						fieldWithPath("groupName").type(JsonFieldType.STRING).description("그룹이름"),
 						fieldWithPath("description").type(JsonFieldType.STRING).description("그룹 설명")
@@ -85,6 +90,9 @@ public class GroupDocuments {
 				.andDo(document("group_search",
 						getDocumentRequest(),
 						getDocumentResponse(),
+						requestHeaders(
+								headerWithName("Authorization").description("user accessToken")
+						),
 						responseFields(
 								fieldWithPath("groupId").type(JsonFieldType.NUMBER).description("그룹id"),
 								fieldWithPath("name").type(JsonFieldType.STRING).description("그룹이름"),

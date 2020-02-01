@@ -1,13 +1,22 @@
 package com.depromeet.watni.domain.attendance.service;
 
+import com.depromeet.watni.domain.attendance.domain.BaseAttendance;
+import com.depromeet.watni.domain.attendance.dto.BaseAttendanceRequestDto;
 import com.depromeet.watni.domain.attendance.repository.AttendanceRepository;
-import org.springframework.stereotype.Service;
+import com.depromeet.watni.domain.conference.domain.Conference;
+import com.depromeet.watni.domain.member.domain.Member;
 
-@Service
-public class AttendanceService {
-    private final AttendanceRepository attendanceRepository;
-    public AttendanceService(AttendanceRepository attendanceRepository) {
-        this.attendanceRepository = attendanceRepository;
+import java.util.Collections;
+import java.util.List;
+
+public interface AttendanceService<T extends BaseAttendance, E extends BaseAttendanceRequestDto> {
+
+    AttendanceRepository getAttendanceRepository();
+
+    T createAttendance(E requestDto, Conference conference, Member member);
+
+    default List<T> getAttendances(Conference conference) {
+        return (List<T>) getAttendanceRepository().findByConference(conference)
+                .orElse(Collections.EMPTY_LIST);
     }
-
 }

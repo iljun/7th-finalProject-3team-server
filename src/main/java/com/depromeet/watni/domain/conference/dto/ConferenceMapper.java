@@ -11,7 +11,7 @@ public interface ConferenceMapper {
     @Mapping(target = "name", source = "name")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "locationInfo", source = "locationInfo")
-    @Mapping(target = "startAt", source = "startAt", ignore = true)
-    @Mapping(target = "endAt", source = "endAt", ignore = true)
+    @Mapping(target = "startAt", source = "startAt")
+    @Mapping(target = "endAt", source = "endAt")
     ConferenceResponseDto converter(Conference conference);
 }

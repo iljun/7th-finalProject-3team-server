@@ -23,6 +23,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentRequest;
 import static com.depromeet.watni.supports.ApiDocumentUtils.getDocumentResponse;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -127,6 +130,11 @@ public class ConferenceDocuments {
         jsonObject.put("name", "test");
         jsonObject.put("description", "test");
         jsonObject.put("locationInfo", "우리집");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        jsonObject.put("startAt", Timestamp.valueOf(localDateTime).getTime());
+        localDateTime = localDateTime.plusDays(1);
+        jsonObject.put("endAt", Timestamp.valueOf(localDateTime).getTime());
+
         ResultActions result = this.mockMvc.perform(
                 post("/api/group/{groupId}/conference", group.getGroupId())
                         .header("Authorization", ApiDocumentUtils.getAuthorizationHeader(this.mockMvc))
@@ -134,6 +142,7 @@ public class ConferenceDocuments {
                         .content(jsonObject.toString())
         ).andExpect(status().isOk());
 
+        System.out.println(result.toString());
         result.andExpect(status().isOk())
                 .andDo(document("POST_CONFERENCE",
                         getDocumentRequest(),
@@ -146,8 +155,8 @@ public class ConferenceDocuments {
                                 fieldWithPath("name").type(JsonFieldType.STRING).description("conference name"),
                                 fieldWithPath("description").type(JsonFieldType.STRING).optional().description("conference description"),
                                 fieldWithPath("locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
-                                fieldWithPath("startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
-                                fieldWithPath("endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt")
+                                fieldWithPath("startAt").type(JsonFieldType.NUMBER).description("conference startAt"),
+                                fieldWithPath("endAt").type(JsonFieldType.NUMBER).description("conference endAt")
                         )
                         )
                 );

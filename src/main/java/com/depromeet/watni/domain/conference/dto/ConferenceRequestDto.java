@@ -23,7 +23,10 @@ public class ConferenceRequestDto {
     @NotNull(groups = create.class)
     private String locationInfo;
 
+    @NotNull(groups = create.class)
     private LocalDateTime startAt;
+
+    @NotNull(groups = create.class)
     private LocalDateTime endAt;
 
     private Group group;

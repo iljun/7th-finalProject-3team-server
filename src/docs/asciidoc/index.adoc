@@ -275,3 +275,25 @@ include::{snippets}/POST_photoAttendance/response-fields.adoc[]
 ==== Response Example
 
 include::{snippets}/POST_photoAttendance/response-body.adoc[]
+
+=== search Attendances
+
+==== Request Header
+
+include::{snippets}/GET_attendances/request-headers.adoc[]
+
+==== Path Variable
+
+include::{snippets}/GET_attendances/path-parameters.adoc[]
+
+==== Request Example
+
+include::{snippets}/GET_attendances/http-request.adoc[]
+
+==== Response Field
+
+include::{snippets}/GET_attendances/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/GET_attendances/response-body.adoc[]

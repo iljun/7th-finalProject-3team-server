@@ -1,11 +1,7 @@
 package com.depromeet.watni.domain.group.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.depromeet.watni.domain.group.domain.Group;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
@@ -14,4 +10,12 @@ import lombok.NoArgsConstructor;
 public class GroupDto {
 	private String groupName;
 	private String description;
+
+	public Group toEntity() {
+		return Group
+				.builder()
+				.name(groupName)
+				.description(description)
+				.build();
+	}
 }

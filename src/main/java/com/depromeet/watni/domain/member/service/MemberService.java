@@ -4,6 +4,7 @@ import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
+import com.depromeet.watni.exception.BadRequestException;
 import com.depromeet.watni.exception.NotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +27,10 @@ public class MemberService implements UserDetailsService {
     }
 
     public Member createMember(MemberRequestDto memberRequestDto) {
+        boolean isExistEmail = memberRepository.findByEmail(memberRequestDto.getEmail()).isPresent();
+        if (isExistEmail) {
+            throw new BadRequestException("Already exists Email");
+        }
         Member member = Member.of(memberRequestDto);
         member = memberRepository.save(member);
         return member;

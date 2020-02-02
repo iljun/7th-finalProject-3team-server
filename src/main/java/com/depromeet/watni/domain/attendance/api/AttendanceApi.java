@@ -68,7 +68,7 @@ public class AttendanceApi<T extends BaseAttendanceRequestDto, E extends BaseAtt
                 .findFirst()
                 .orElseThrow(() -> new BadRequestException("NOT FOUND CONFERENCE"));
         List<E> attendances = attendanceService.getAttendances(conference);
-        // member정보 필요
+
         return ResponseEntity.ok(attendances
                 .stream()
                 .map(a -> ATTENDANCE_MAPPER.map(a))

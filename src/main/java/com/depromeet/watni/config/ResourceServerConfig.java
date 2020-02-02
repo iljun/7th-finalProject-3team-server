@@ -38,7 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.headers().frameOptions().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/docs/**", "/oauth/token", "/sign-up")
+                .antMatchers("/docs/**", "/oauth/token", "/sign-up", "/h2-console/**")
                 .permitAll()
             .and()
                 .authorizeRequests()

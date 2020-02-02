@@ -29,9 +29,13 @@ public class ConferenceRequestDto {
     @NotNull(groups = create.class)
     private LocalDateTime endAt;
 
+    private String base64Image;
+
+    private String notice;
+
     private Group group;
 
-    public Conference toEntity(Group group) {
+    private Conference.ConferenceBuilder toEntity() {
         return Conference
                 .builder()
                 .name(this.name)
@@ -39,19 +43,19 @@ public class ConferenceRequestDto {
                 .locationInfo(this.locationInfo)
                 .startAt(this.startAt)
                 .endAt(this.endAt)
+                .photoUrl(this.base64Image == null ? null : this.base64Image)
+                .notice(this.notice == null ? null : this.notice);
+    }
+
+    public Conference toEntity(Group group) {
+        return this.toEntity()
                 .group(group)
                 .build();
     }
 
     public Conference toEntity(Conference conference) {
-        return Conference
-                .builder()
+        return this.toEntity()
                 .conferenceId(conference.getConferenceId())
-                .name(this.name)
-                .description(this.description)
-                .locationInfo(this.locationInfo)
-                .startAt(this.startAt)
-                .endAt(this.endAt)
                 .group(conference.getGroup())
                 .build();
     }

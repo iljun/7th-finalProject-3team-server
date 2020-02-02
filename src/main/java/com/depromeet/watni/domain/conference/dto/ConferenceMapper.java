@@ -13,5 +13,7 @@ public interface ConferenceMapper {
     @Mapping(target = "locationInfo", source = "locationInfo")
     @Mapping(target = "startAt", source = "startAt")
     @Mapping(target = "endAt", source = "endAt")
+    @Mapping(target = "photoUrl", source = "photoUrl")
+    @Mapping(target = "notice", source = "notice")
     ConferenceResponseDto converter(Conference conference);
 }

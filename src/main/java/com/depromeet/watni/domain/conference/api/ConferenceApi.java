@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,7 +67,7 @@ public class ConferenceApi {
     @PostMapping("/api/group/{groupId}/conference")
     public ResponseEntity generateConference(@PathVariable long groupId,
                                              @RequestBody @Validated({ConferenceRequestDto.create.class}) ConferenceRequestDto conferenceRequestDto,
-                                             @AuthenticationPrincipal MemberDetail memberDetail) {
+                                             @AuthenticationPrincipal MemberDetail memberDetail) throws IOException {
         Group group = groupService.selectGroupByGroupId(groupId);
         group.isAdministrator(memberDetail);
         Conference conference = conferenceService.generateConference(conferenceRequestDto, group);
@@ -78,7 +79,7 @@ public class ConferenceApi {
     public ResponseEntity updateConference(@PathVariable long groupId,
                                            @PathVariable long conferenceId,
                                            @RequestBody @Validated({ConferenceRequestDto.update.class}) ConferenceRequestDto conferenceRequestDto,
-                                           @AuthenticationPrincipal MemberDetail memberDetail) {
+                                           @AuthenticationPrincipal MemberDetail memberDetail) throws IOException {
         Group group = groupService.selectGroupByGroupId(groupId);
         group.isAdministrator(memberDetail);
         Conference originConference = group.containsConference(conferenceId);

@@ -2,7 +2,10 @@ package com.depromeet.watni.supports;
 
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
+import com.depromeet.watni.domain.group.service.GroupGenerateService;
 import com.depromeet.watni.domain.group.service.GroupService;
+import com.depromeet.watni.domain.member.MemberDetail;
+import com.depromeet.watni.domain.member.repository.MemberRepository;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +39,10 @@ public class GroupDocuments {
 	private MockMvc mockMvc;
 	@Autowired
 	private GroupService groupService;
+	@Autowired
+	private GroupGenerateService groupGenerateService;
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@Test
 	public void 그룹만들기() throws Exception {
@@ -78,7 +85,9 @@ public class GroupDocuments {
 				.groupName("testGroup")
 				.description("testDescription")
 				.build();
-		Group group = groupService.createGroup(groupDto);
+
+		MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
+		Group group = groupGenerateService.createGroup(groupDto, memberDetail);
 
 		ResultActions resultActions = this.mockMvc.perform(
 				get("/api/group/{groupId}", group.getGroupId())

@@ -7,8 +7,10 @@ import com.depromeet.watni.domain.conference.dto.ConferenceRequestDto;
 import com.depromeet.watni.domain.conference.service.ConferenceService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
+import com.depromeet.watni.domain.group.service.GroupGenerateService;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.manager.service.ManagerService;
+import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import org.apache.commons.io.FileUtils;
@@ -28,6 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
@@ -61,21 +64,24 @@ public class AttendanceDocuments {
     private ManagerService managerService;
     @Autowired
     private PhotoAttendanceService photoAttendanceService;
+    @Autowired
+    private GroupGenerateService groupGenerateService;
 
     private Group group;
     private Conference conference;
     private Member member;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
         LocalDateTime localDateTime = LocalDateTime.now();
-        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", localDateTime, localDateTime.plusDays(1), null);
+        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", localDateTime, localDateTime.plusDays(1), null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
                 .description("test")
                 .groupName("testGroup")
                 .build();
-        group = groupService.createGroup(groupDto);
+        MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
+        group = groupGenerateService.createGroup(groupDto, memberDetail);
         conference = conferenceService.generateConference(conferenceRequestDto, group);
         member = memberRepository.findByEmail("test@naver.com").get();
         managerService.registerManager(group, member);

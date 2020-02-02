@@ -2,8 +2,10 @@ package com.depromeet.watni.supports;
 
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
+import com.depromeet.watni.domain.group.service.GroupGenerateService;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.manager.service.ManagerService;
+import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import org.json.JSONObject;
@@ -46,6 +48,8 @@ public class ApplyDocuments {
     private MemberRepository memberRepository;
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private GroupGenerateService groupGenerateService;
 
     private Group group;
 
@@ -56,7 +60,8 @@ public class ApplyDocuments {
                 .description("test")
                 .groupName("testGroup")
                 .build();
-        group = groupService.createGroup(groupDto);
+        MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
+        group = groupGenerateService.createGroup(groupDto, memberDetail);
         Member member = memberRepository.findByEmail("test@naver.com").get();
         managerService.registerManager(group, member);
     }

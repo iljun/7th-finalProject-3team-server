@@ -47,6 +47,13 @@ public class Conference extends BaseEntity {
     @Column(name = "end_at")
     private LocalDateTime endAt;
 
+    @Setter
+    @Column(name = "photo_url")
+    private String photoUrl;
+
+    @Column(name = "notice")
+    private String notice;
+
     public void availableAttendance() {
         LocalDateTime now = LocalDateTime.now();
         if (!this.startAt.isBefore(now) || !this.endAt.isAfter(now)) {

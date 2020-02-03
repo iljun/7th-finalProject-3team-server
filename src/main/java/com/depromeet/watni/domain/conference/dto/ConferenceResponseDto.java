@@ -15,6 +15,10 @@ public class ConferenceResponseDto {
 
     private String locationInfo;
 
+    private String photoUrl;
+
+    private String notice;
+
     private LocalDateTime startAt;
 
     private LocalDateTime endAt;

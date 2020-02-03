@@ -15,14 +15,16 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity handleNotFoundException(NotFoundException ex) {
+        ExceptionDto exception = new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
     
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleBadRequestException(BadRequestException ex){
-    	return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity handleBadRequestException(BadRequestException ex){
+        ExceptionDto exception = new ExceptionDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
     }
 
 }

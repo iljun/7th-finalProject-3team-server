@@ -2,8 +2,10 @@ package com.depromeet.watni.domain.member.api;
 
 import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.domain.member.domain.Member;
+import com.depromeet.watni.domain.member.dto.MemberInfoResponse;
 import com.depromeet.watni.domain.member.dto.MemberMapper;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
+import com.depromeet.watni.domain.member.service.MemberInfoService;
 import com.depromeet.watni.domain.member.service.MemberService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class MemberApi {
 
@@ -22,10 +26,12 @@ public class MemberApi {
 
     private MemberService memberService;
     private PasswordEncoder passwordEncoder;
+    private MemberInfoService memberInfoService;
     public MemberApi(MemberService memberService,
-                     PasswordEncoder passwordEncoder) {
+                     PasswordEncoder passwordEncoder, MemberInfoService memberInfoService) {
         this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
+        this.memberInfoService = memberInfoService;
     }
 
     @PostMapping("/sign-up")
@@ -38,6 +44,7 @@ public class MemberApi {
     @GetMapping("/api/user/me")
     public ResponseEntity getMyInfo(@AuthenticationPrincipal MemberDetail memberDetail) {
         // TODO member additional Info
-        return ResponseEntity.ok(MEMBER_MAPPER.convert(memberDetail));
+        List<MemberInfoResponse> result = memberInfoService.getMemberInfo(memberDetail);
+        return ResponseEntity.ok(result);
     }
 }

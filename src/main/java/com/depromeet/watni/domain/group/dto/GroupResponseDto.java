@@ -1,11 +1,6 @@
 package com.depromeet.watni.domain.group.dto;
 
-import com.depromeet.watni.domain.accession.domain.Accession;
-import com.depromeet.watni.domain.conference.domain.Conference;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,10 +12,10 @@ public class GroupResponseDto {
 
 	private String name;
 	
-	@Builder.Default
-	private List<Conference> conferences = new ArrayList<Conference>();
+//	@Builder.Default
+//	private List<Conference> conferences = new ArrayList<Conference>();
 
-	@Builder.Default
-	private List<Accession> accessions = new ArrayList<Accession>();
+//	@Builder.Default
+//	private List<Accession> accessions = new ArrayList<Accession>();
 
 }

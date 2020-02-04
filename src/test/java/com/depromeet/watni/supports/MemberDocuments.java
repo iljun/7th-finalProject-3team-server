@@ -115,14 +115,14 @@ public class MemberDocuments {
                         responseFields(
                                 fieldWithPath("[].group.groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
                                 fieldWithPath("[].group.name").type(JsonFieldType.STRING).optional().description("그룹이름"),
-                                fieldWithPath("[].group.conferences.conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
-                                fieldWithPath("[].group.conferences.name").type(JsonFieldType.STRING).optional().description("conference name"),
-                                fieldWithPath("[].group.conferences.description").type(JsonFieldType.STRING).optional().description("conference description"),
-                                fieldWithPath("[].group.conferences.locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
-                                fieldWithPath("[].group.conferences.startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
-                                fieldWithPath("[].group.conferences.endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
-                                fieldWithPath("[].group.conferences.photoUrl").type(JsonFieldType.NUMBER).optional().description("conference photoUrl"),
-                                fieldWithPath("[].group.conferences.notice").type(JsonFieldType.NUMBER).optional().description("conference notice"),
+                                fieldWithPath("[].group.conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
+                                fieldWithPath("[].group.conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
+                                fieldWithPath("[].group.conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
+                                fieldWithPath("[].group.conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
+                                fieldWithPath("[].group.conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
+                                fieldWithPath("[].group.conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
+                                fieldWithPath("[].group.conferences[].photoUrl").type(JsonFieldType.NUMBER).optional().description("conference photoUrl"),
+                                fieldWithPath("[].group.conferences[].notice").type(JsonFieldType.NUMBER).optional().description("conference notice"),
                                 fieldWithPath("[].manager").type(JsonFieldType.BOOLEAN).description("isManger")
                         )
                         )

@@ -35,7 +35,7 @@ public class MemberInfoService {
         for (Accession accession: accessions) {
             Group participateGroup = accession.getGroup();
             GroupResponseDto group = new GroupResponseDto(participateGroup);
-            boolean isManager = managerRepository.findTop1ByGroupAndMember(participateGroup,member).isPresent();
+            boolean isManager = managerRepository.findOneByGroupAndMember(participateGroup,member).isPresent();
             MemberInfoResponse memberInfo = new MemberInfoResponse(group,isManager);
             memberInfoResponses.add(memberInfo);
         }

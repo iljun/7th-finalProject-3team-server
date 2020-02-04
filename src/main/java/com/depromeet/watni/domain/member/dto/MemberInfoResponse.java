@@ -1,17 +1,20 @@
 package com.depromeet.watni.domain.member.dto;
 
-import com.depromeet.watni.domain.conference.dto.ConferenceResponseDto;
 import com.depromeet.watni.domain.group.dto.GroupResponseDto;
-import lombok.*;
-
-import java.util.List;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
 public class MemberInfoResponse {
-    private boolean isManager;
     private GroupResponseDto group;
-    private List<ConferenceResponseDto> conferences;
+    private boolean isManager;
+
+    public MemberInfoResponse(GroupResponseDto group,boolean isManager){
+        this.group=group;
+        this.isManager=isManager;
+    }
 }

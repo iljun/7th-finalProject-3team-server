@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface ManagerRepository extends JpaRepository<Manager, Long> {
-    Optional<Manager> findOneByGroupAndMember(Group group, Member member);
+    Optional<Manager> findTop1ByGroupAndMember(Group group, Member member);
 
 }

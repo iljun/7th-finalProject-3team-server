@@ -297,3 +297,23 @@ include::{snippets}/GET_attendances/response-fields.adoc[]
 ==== Response Example
 
 include::{snippets}/GET_attendances/response-body.adoc[]
+
+== User
+
+=== me
+
+==== Request Header
+
+include::{snippets}/USER_ME/request-headers.adoc[]
+
+==== Request
+
+include::{snippets}/USER_ME/http-request.adoc[]
+
+==== Response filed
+
+include::{snippets}/USER_ME/response-fields.adoc[]
+
+==== Response
+
+include::{snippets}/USER_ME/response-body.adoc[]

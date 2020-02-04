@@ -18,7 +18,7 @@ public class ManagerService {
     public Manager registerManager (Group group, Member member) {
         boolean isExistManager = group.getManagers()
                 .stream()
-                .filter(m -> m.getManagerId() == member.getMemberId())
+                .filter(m -> m.getMember().getMemberId() == member.getMemberId())
                 .findFirst()
                 .isPresent();
 

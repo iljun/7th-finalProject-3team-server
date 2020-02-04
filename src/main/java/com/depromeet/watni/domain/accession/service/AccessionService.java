@@ -53,4 +53,11 @@ public class AccessionService {
         accessionRepository.delete(accession);
     }
 
+    @Transactional
+    public List<Accession> findAccessionsByMember(Long memberId){
+        Member member = memberService.selectByMemberId(memberId);
+        List<Accession> accessions = accessionRepository.findAllByMember(member).orElseThrow(()-> new NotFoundException("NOT FOUND ACCESSIONS"));
+        return accessions;
+    }
+
 }

@@ -53,7 +53,7 @@ public class Group extends BaseEntity {
 
     //map struct
     public GroupResponseDto toResponseDto() {
-    	return GroupResponseDto.builder().groupId(this.groupId).name(this.name).conferences(this.conferences).accessions(this.accessions).build();
+    	return new GroupResponseDto(this);
     }
 
     public void isAdministrator(MemberDetail memberDetail) {

@@ -1,11 +1,12 @@
 package com.depromeet.watni.domain.group.dto;
 
-import com.depromeet.watni.domain.accession.domain.Accession;
-import com.depromeet.watni.domain.conference.domain.Conference;
+import com.depromeet.watni.domain.conference.dto.ConferenceResponseDto;
+import com.depromeet.watni.domain.group.domain.Group;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -18,9 +19,14 @@ public class GroupResponseDto {
 	private String name;
 	
 	@Builder.Default
-	private List<Conference> conferences = new ArrayList<Conference>();
+	private List<ConferenceResponseDto> conferences = new ArrayList<ConferenceResponseDto>();
+	//	@Builder.Default
+    //	private List<Accession> accessions = new ArrayList<Accession>();
 
-	@Builder.Default
-	private List<Accession> accessions = new ArrayList<Accession>();
+	public GroupResponseDto(Group group){
+		this.groupId = group.getGroupId();
+		this.name = group.getName();
+		this.conferences = group.getConferences().stream().map(conference -> new ConferenceResponseDto(conference)).collect(Collectors.toList());
+	}
 
 }

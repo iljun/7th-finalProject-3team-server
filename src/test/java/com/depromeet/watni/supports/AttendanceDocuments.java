@@ -83,8 +83,7 @@ public class AttendanceDocuments {
         MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
         group = groupGenerateService.createGroup(groupDto, memberDetail);
         conference = conferenceService.generateConference(conferenceRequestDto, group);
-        member = memberRepository.findByEmail("test@naver.com").get();
-        managerService.registerManager(group, member);
+        member = memberRepository.findById(1L).get();
     }
 
     @Test

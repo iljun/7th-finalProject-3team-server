@@ -19,7 +19,7 @@ public class ManagerService {
         boolean isExistManager = group.getManagers()
                 .stream()
                 .filter(m -> m.getMember().getMemberId() == member.getMemberId())
-                .findFirst()
+                .findAny()
                 .isPresent();
 
         if (isExistManager) {

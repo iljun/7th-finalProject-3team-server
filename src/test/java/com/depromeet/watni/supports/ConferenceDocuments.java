@@ -9,7 +9,6 @@ import com.depromeet.watni.domain.group.service.GroupGenerateService;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.manager.service.ManagerService;
 import com.depromeet.watni.domain.member.MemberDetail;
-import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -35,7 +34,8 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.headerWit
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,8 +73,6 @@ public class ConferenceDocuments {
         MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
         group = groupGenerateService.createGroup(groupDto, memberDetail);
         conference = conferenceService.generateConference(conferenceRequestDto, group);
-        Member member = memberRepository.findByEmail("test@naver.com").get();
-        managerService.registerManager(group, member);
     }
 
     @Test

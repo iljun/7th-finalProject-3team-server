@@ -32,7 +32,7 @@ public class ApplyApi {
         Group group = groupService.selectGroupByGroupId(groupId);
         group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
-        BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
+        BaseApply baseApply = applyService.generateApply(baseApplyRequestDto.getContent(),group);
         CodeApplyResponseDto result = new CodeApplyResponseDto((CodeApply) baseApply);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
@@ -43,7 +43,7 @@ public class ApplyApi {
         Group group = groupService.selectGroupByGroupId(groupId);
         
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
-        BaseApply baseApply = applyService.getApply(baseApplyRequestDto,group);
+        BaseApply baseApply = applyService.getApply(baseApplyRequestDto.getContent(),group);
         CodeApplyResponseDto result = new CodeApplyResponseDto((CodeApply) baseApply);
         return ResponseEntity.ok().body(result);
     }
@@ -55,7 +55,7 @@ public class ApplyApi {
         Group group = groupService.selectGroupByGroupId(groupId);
         //group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
-        applyService.checkApply(baseApplyRequestDto,group);
+        applyService.checkApply(baseApplyRequestDto.getContent(),group);
         return ResponseEntity.accepted().build();
     }
 }

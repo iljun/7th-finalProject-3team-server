@@ -1,7 +1,9 @@
 package com.depromeet.watni.domain.apply.api;
 
 import com.depromeet.watni.domain.apply.domain.BaseApply;
+import com.depromeet.watni.domain.apply.domain.CodeApply;
 import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
+import com.depromeet.watni.domain.apply.dto.CodeApplyResponseDto;
 import com.depromeet.watni.domain.apply.service.ApplyService;
 import com.depromeet.watni.domain.apply.service.ApplyServiceFactory;
 import com.depromeet.watni.domain.group.domain.Group;
@@ -31,7 +33,8 @@ public class ApplyApi {
         group.isAdministrator(memberDetail);
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         BaseApply baseApply = applyService.generateApply(baseApplyRequestDto,group);
-        return ResponseEntity.status(HttpStatus.CREATED).body(baseApply);
+        CodeApplyResponseDto result = new CodeApplyResponseDto((CodeApply) baseApply);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @GetMapping("/api/group/{groupId}/apply-way")
@@ -41,7 +44,8 @@ public class ApplyApi {
         
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         BaseApply baseApply = applyService.getApply(baseApplyRequestDto,group);
-        return ResponseEntity.ok().body(baseApply);
+        CodeApplyResponseDto result = new CodeApplyResponseDto((CodeApply) baseApply);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/api/group/{groupId}/apply-way/check")

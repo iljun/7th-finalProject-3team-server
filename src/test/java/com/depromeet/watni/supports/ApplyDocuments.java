@@ -81,10 +81,7 @@ public class ApplyDocuments {
                                 parameterWithName("groupId").description("group Id")
                         ),
                         responseFields(
-                                fieldWithPath("code").type(JsonFieldType.STRING).description("code"),
-                                fieldWithPath("deleted").type(JsonFieldType.BOOLEAN).description("deleted"),
-                                fieldWithPath("modifiedAt").type(JsonFieldType.NUMBER).optional().description("groupCode modifiedAt"),
-                                fieldWithPath("createdAt").type(JsonFieldType.NUMBER).description("groupCode createdAt")
+                                fieldWithPath("code").type(JsonFieldType.STRING).description("code")
                         )
                         )
                 );

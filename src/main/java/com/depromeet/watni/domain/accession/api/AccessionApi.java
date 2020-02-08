@@ -2,13 +2,11 @@ package com.depromeet.watni.domain.accession.api;
 
 import com.depromeet.watni.domain.accession.domain.Accession;
 import com.depromeet.watni.domain.accession.dto.AccessionDto;
-import com.depromeet.watni.domain.accession.dto.AccessionResponseDto;
 import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,15 +23,8 @@ public class AccessionApi {
     public ResponseEntity accessGroup(@PathVariable Long groupId, @RequestBody AccessionDto accessionDto) {
 
         List<Accession> accessions= accessionService.accessGroup(groupId, accessionDto.getMemberIdList());
-        // group exception
-        // group -> code exception
-        // code / auto -> create Accession
-        // return GROUP, SESSION
-        List<AccessionResponseDto> result = new ArrayList<AccessionResponseDto>();
-        for (Accession accession : accessions) {
-            result.add(accession.toResponseDto());
-        }
-        return ResponseEntity.ok().body(result);
+
+        return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/api/group/{groupId}/accession/member/{memberId}")

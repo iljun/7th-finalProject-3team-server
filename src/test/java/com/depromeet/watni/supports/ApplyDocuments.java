@@ -1,5 +1,7 @@
 package com.depromeet.watni.supports;
 
+import com.depromeet.watni.domain.apply.constant.ApplyType;
+import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
 import com.depromeet.watni.domain.apply.service.CodeApplyService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
@@ -54,6 +56,9 @@ public class ApplyDocuments {
 
     @Before
     public void setup() {
+        BaseApplyRequestDto baseApplyRequestDto = new BaseApplyRequestDto();
+        baseApplyRequestDto.setApplyType(ApplyType.CODE);
+        baseApplyRequestDto.setContent("getCode");
         GroupDto groupDto = GroupDto
                 .builder()
                 .description("test")
@@ -62,7 +67,7 @@ public class ApplyDocuments {
         MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
         group = groupGenerateService.createGroup(groupDto, memberDetail);
         group1 = groupGenerateService.createGroup(groupDto,memberDetail);
-        codeApplyService.generateApply("getCode",group1);
+        codeApplyService.generateApply(baseApplyRequestDto,group1);
     }
 
     @Test
@@ -119,6 +124,34 @@ public class ApplyDocuments {
                         ),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.STRING).description("code")
+                        )
+                        )
+                );
+
+    }
+
+    @Test
+    public void 올바른_코드_확인() throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("applyType", "CODE");
+        jsonObject.put("content", "getCode");
+
+        ResultActions result = this.mockMvc.perform(
+                get("/api/group/{groupId}/apply-way/check", group1.getGroupId())
+                        .header("Authorization", ApiDocumentUtils.getAuthorizationHeader(this.mockMvc))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonObject.toString())
+        ).andExpect(status().isAccepted());
+
+        result.andExpect(status().isAccepted())
+                .andDo(document("CHECK_APPLY_CODE_CORRECT",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
+                        pathParameters(
+                                parameterWithName("groupId").description("group Id")
                         )
                         )
                 );

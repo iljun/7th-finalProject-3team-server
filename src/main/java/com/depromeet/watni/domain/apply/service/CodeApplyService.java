@@ -2,6 +2,7 @@ package com.depromeet.watni.domain.apply.service;
 
 import com.depromeet.watni.domain.apply.domain.BaseApply;
 import com.depromeet.watni.domain.apply.domain.CodeApply;
+import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
 import com.depromeet.watni.domain.apply.repository.ApplyRepository;
 import com.depromeet.watni.domain.apply.repository.CodeApplyRepository;
 import com.depromeet.watni.domain.group.domain.Group;
@@ -23,27 +24,27 @@ public class CodeApplyService implements ApplyService{
 
     @Override
     @Transactional
-    public BaseApply generateApply(String content, Group group) {
+    public BaseApply generateApply(BaseApplyRequestDto baseApplyRequestDto, Group group) {
         if(codeApplyRepository.findOneByGroup(group).isPresent())
             throw new BadRequestException("Already Code Apply Exist");
         CodeApply codeApply = new CodeApply();
-        codeApply.setCode(content);
+        codeApply.setCode(baseApplyRequestDto.getContent());
         codeApply.setGroup(group);
         return codeApplyRepository.save(codeApply);
     }
 
     @Override
     @Transactional
-    public BaseApply getApply(String content, Group group) {
+    public BaseApply getApply(BaseApplyRequestDto baseApplyRequestDto, Group group) {
         BaseApply baseApply = codeApplyRepository.findOneByGroup(group).orElseThrow(()->new NotFoundException("NOT FOUND CODE APPLY"));
         return baseApply;
     }
 
     @Override
     @Transactional
-    public void checkApply(String content, Group group){
-        CodeApply codeApply = (CodeApply) this.getApply(content,group);
-        if (! codeApply.getCode().equals(content))
+    public void checkApply(BaseApplyRequestDto baseApplyRequestDto, Group group){
+        CodeApply codeApply = (CodeApply) this.getApply(baseApplyRequestDto,group);
+        if (! codeApply.getCode().equals(baseApplyRequestDto.getContent()))
             throw new BadRequestException("Wrong Apply code");
     }
 

@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface AccessionRepository extends JpaRepository<Accession, Long> {
     Optional<Accession> findOneByGroupAndMember(Group group, Member member);
-    Optional<List<Accession>> findAllByMember (Member member);
+    List<Accession> findAllByMember (Member member);
 }

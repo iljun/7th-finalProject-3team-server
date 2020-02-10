@@ -110,18 +110,22 @@ public class MemberDocuments {
                                 headerWithName("Authorization").description("user accessToken")
                         ),
                         responseFields(
-                                fieldWithPath("[].group.groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
-                                fieldWithPath("[].group.name").type(JsonFieldType.STRING).optional().description("그룹이름"),
-                                fieldWithPath("[].group.conferences").type(JsonFieldType.ARRAY).optional().description("모임"),
-                                fieldWithPath("[].group.conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
-                                fieldWithPath("[].group.conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
-                                fieldWithPath("[].group.conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
-                                fieldWithPath("[].group.conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
-                                fieldWithPath("[].group.conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
-                                fieldWithPath("[].group.conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
-                                fieldWithPath("[].group.conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
-                                fieldWithPath("[].group.conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice"),
-                                fieldWithPath("[].manager").type(JsonFieldType.BOOLEAN).description("isManger")
+
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("멤버 이메일"),
+                                fieldWithPath("name").type(JsonFieldType.STRING).description("멤버 이름"),
+                                fieldWithPath("memberDetails").type(JsonFieldType.ARRAY).optional().description("멤버의 참여한 모임 정보"),
+                                fieldWithPath("memberDetails[].group.groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
+                                fieldWithPath("memberDetails[].group.name").type(JsonFieldType.STRING).optional().description("그룹이름"),
+                                fieldWithPath("memberDetails[].group.conferences").type(JsonFieldType.ARRAY).optional().description("모임"),
+                                fieldWithPath("memberDetails[].group.conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
+                                fieldWithPath("memberDetails[].group.conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
+                                fieldWithPath("memberDetails[].group.conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
+                                fieldWithPath("memberDetails[].group.conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
+                                fieldWithPath("memberDetails[].group.conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
+                                fieldWithPath("memberDetails[].group.conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
+                                fieldWithPath("memberDetails[].group.conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
+                                fieldWithPath("memberDetails[].group.conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice"),
+                                fieldWithPath("memberDetails[].manager").type(JsonFieldType.BOOLEAN).description("isManger")
                         )
                         )
                 );

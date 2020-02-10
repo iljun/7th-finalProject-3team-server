@@ -56,7 +56,7 @@ public class AccessionService {
     @Transactional
     public List<Accession> findAccessionsByMember(Long memberId){
         Member member = memberService.selectByMemberId(memberId);
-        List<Accession> accessions = accessionRepository.findAllByMember(member).orElseThrow(()-> new NotFoundException("NOT FOUND ACCESSIONS"));
+        List<Accession> accessions = accessionRepository.findAllByMember(member);
         return accessions;
     }
 

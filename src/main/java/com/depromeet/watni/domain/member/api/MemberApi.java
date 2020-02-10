@@ -5,6 +5,7 @@ import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.dto.MemberInfoResponse;
 import com.depromeet.watni.domain.member.dto.MemberMapper;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
+import com.depromeet.watni.domain.member.dto.UserMeResponse;
 import com.depromeet.watni.domain.member.service.MemberInfoService;
 import com.depromeet.watni.domain.member.service.MemberService;
 import org.mapstruct.factory.Mappers;
@@ -44,7 +45,10 @@ public class MemberApi {
     @GetMapping("/api/user/me")
     public ResponseEntity getMyInfo(@AuthenticationPrincipal MemberDetail memberDetail) {
         // TODO member additional Info
-        List<MemberInfoResponse> result = memberInfoService.getMemberInfo(memberDetail);
+        Member member = memberService.selectByMemberId(memberDetail.getMemberId());
+        List<MemberInfoResponse> details = memberInfoService.getMemberInfo(memberDetail);
+        UserMeResponse result = new UserMeResponse(member.getEmail(),member.getName(),details);
+
         return ResponseEntity.ok(result);
     }
 }

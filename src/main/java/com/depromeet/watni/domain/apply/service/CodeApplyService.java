@@ -1,6 +1,5 @@
 package com.depromeet.watni.domain.apply.service;
 
-import com.depromeet.watni.domain.apply.constant.ApplyType;
 import com.depromeet.watni.domain.apply.domain.BaseApply;
 import com.depromeet.watni.domain.apply.domain.CodeApply;
 import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
@@ -9,10 +8,7 @@ import com.depromeet.watni.domain.apply.repository.CodeApplyRepository;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.exception.BadRequestException;
 import com.depromeet.watni.exception.NotFoundException;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 public class CodeApplyService implements ApplyService{
@@ -25,7 +21,6 @@ public class CodeApplyService implements ApplyService{
     }
 
     @Override
-    @Transactional
     public BaseApply generateApply(BaseApplyRequestDto baseApplyRequestDto, Group group) {
         if(codeApplyRepository.findOneByGroup(group).isPresent())
             throw new BadRequestException("Already Code Apply Exist");
@@ -36,14 +31,12 @@ public class CodeApplyService implements ApplyService{
     }
 
     @Override
-    @Transactional
     public BaseApply getApply(BaseApplyRequestDto baseApplyRequestDto, Group group) {
         BaseApply baseApply = codeApplyRepository.findOneByGroup(group).orElseThrow(()->new NotFoundException("NOT FOUND CODE APPLY"));
         return baseApply;
     }
 
     @Override
-    @Transactional
     public void checkApply(BaseApplyRequestDto baseApplyRequestDto, Group group){
         CodeApply codeApply = (CodeApply) this.getApply(baseApplyRequestDto,group);
         if (! codeApply.getCode().equals(baseApplyRequestDto.getContent()))

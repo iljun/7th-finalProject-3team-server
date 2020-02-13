@@ -130,6 +130,50 @@ include::{snippets}/POST_APPLY_WAY/response-fields.adoc[]
 
 include::{snippets}/POST_APPLY_WAY/http-response.adoc[]
 
+=== Get Group Code
+
+==== Request Header
+
+include::{snippets}/GET_APPLY_WAY/request-headers.adoc[]
+
+==== Request
+
+include::{snippets}/GET_APPLY_WAY/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/GET_APPLY_WAY/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/GET_APPLY_WAY/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/GET_APPLY_WAY/http-response.adoc[]
+
+=== Group Code Check
+
+==== Request Header
+
+include::{snippets}/CHECK_APPLY_CODE_CORRECT/request-headers.adoc[]
+
+==== Request
+
+include::{snippets}/CHECK_APPLY_CODE_CORRECT/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/CHECK_APPLY_CODE_CORRECT/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/CHECK_APPLY_CODE_CORRECT/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/CHECK_APPLY_CODE_CORRECT/http-response.adoc[]
+
 == Conference API
 
 === search conferences
@@ -317,3 +361,27 @@ include::{snippets}/USER_ME/response-fields.adoc[]
 ==== Response
 
 include::{snippets}/USER_ME/response-body.adoc[]
+
+== Accession API
+
+=== Access Group
+
+==== Request Header
+
+include::{snippets}/POST_ACCESS_GROUP/request-headers.adoc[]
+
+==== Request
+
+include::{snippets}/POST_ACCESS_GROUP/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/POST_ACCESS_GROUP/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/POST_ACCESS_GROUP/response-fields.adoc[]
+
+==== Response Example
+
+include::{snippets}/POST_ACCESS_GROUP/http-response.adoc[]

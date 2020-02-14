@@ -2,6 +2,7 @@ package com.depromeet.watni.supports;
 
 import com.depromeet.watni.domain.apply.constant.ApplyType;
 import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
+import com.depromeet.watni.domain.apply.repository.CodeApplyRepository;
 import com.depromeet.watni.domain.apply.service.CodeApplyService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
@@ -9,6 +10,7 @@ import com.depromeet.watni.domain.group.service.GroupGenerateService;
 import com.depromeet.watni.domain.member.MemberDetail;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +53,9 @@ public class ApplyDocuments {
     @Autowired
     private CodeApplyService codeApplyService;
 
+    @Autowired
+    private CodeApplyRepository codeApplyRepository;
+
     private Group group;
     private Group group1;
 
@@ -68,6 +73,11 @@ public class ApplyDocuments {
         group = groupGenerateService.createGroup(groupDto, memberDetail);
         group1 = groupGenerateService.createGroup(groupDto,memberDetail);
         codeApplyService.generateApply(baseApplyRequestDto,group1);
+    }
+
+    @After
+    public void finish(){
+        codeApplyRepository.deleteAll();
     }
 
     @Test
@@ -131,10 +141,10 @@ public class ApplyDocuments {
     }
 
     @Test
-    public void 올바른_코드_확인() throws Exception {
+    public void 코드_중복_체크() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("applyType", "CODE");
-        jsonObject.put("content", "getCode");
+        jsonObject.put("content", "newCode");
 
         ResultActions result = this.mockMvc.perform(
                 get("/api/group/{groupId}/apply-way/check", group1.getGroupId())
@@ -144,7 +154,7 @@ public class ApplyDocuments {
         ).andExpect(status().isAccepted());
 
         result.andExpect(status().isAccepted())
-                .andDo(document("CHECK_APPLY_CODE_CORRECT",
+                .andDo(document("CHECK_APPLY_CODE",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestHeaders(
@@ -152,6 +162,45 @@ public class ApplyDocuments {
                         ),
                         pathParameters(
                                 parameterWithName("groupId").description("group Id")
+                        )
+                        )
+                );
+
+    }
+
+    @Test
+    public void 코드_그룹_참여() throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("applyType", "CODE");
+        jsonObject.put("content", "getCode");
+
+        ResultActions result = this.mockMvc.perform(
+                post("/api/group/apply-way/confirm", group1.getGroupId())
+                        .header("Authorization", ApiDocumentUtils.getAuthorizationHeader(this.mockMvc))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonObject.toString())
+        ).andExpect(status().isAccepted());
+
+        result.andExpect(status().isAccepted())
+                .andDo(document("CONFIRM_APPLY_CODE_CORRECT",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("Authorization").description("user accessToken")
+                        ),
+                        responseFields(
+
+                                fieldWithPath("groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
+                                fieldWithPath("name").type(JsonFieldType.STRING).optional().description("그룹이름"),
+                                fieldWithPath("conferences").type(JsonFieldType.ARRAY).optional().description("모임"),
+                                fieldWithPath("conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
+                                fieldWithPath("conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
+                                fieldWithPath("conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
+                                fieldWithPath("conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
+                                fieldWithPath("conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
+                                fieldWithPath("conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
+                                fieldWithPath("conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
+                                fieldWithPath("conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice")
                         )
                         )
                 );

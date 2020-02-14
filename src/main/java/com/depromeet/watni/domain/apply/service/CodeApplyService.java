@@ -6,6 +6,7 @@ import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
 import com.depromeet.watni.domain.apply.repository.ApplyRepository;
 import com.depromeet.watni.domain.apply.repository.CodeApplyRepository;
 import com.depromeet.watni.domain.group.domain.Group;
+import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.exception.BadRequestException;
 import com.depromeet.watni.exception.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,9 @@ public class CodeApplyService implements ApplyService{
 
     @Override
     public BaseApply generateApply(BaseApplyRequestDto baseApplyRequestDto, Group group) {
-        if(codeApplyRepository.findOneByGroup(group).isPresent())
+        if(codeApplyRepository.findOneByCode(baseApplyRequestDto.getContent()).isPresent()) {
             throw new BadRequestException("Already Code Apply Exist");
+        }
         CodeApply codeApply = new CodeApply();
         codeApply.setCode(baseApplyRequestDto.getContent());
         codeApply.setGroup(group);
@@ -38,9 +40,15 @@ public class CodeApplyService implements ApplyService{
 
     @Override
     public void checkApply(BaseApplyRequestDto baseApplyRequestDto, Group group){
-        CodeApply codeApply = (CodeApply) this.getApply(baseApplyRequestDto,group);
-        if (! codeApply.getCode().equals(baseApplyRequestDto.getContent()))
-            throw new BadRequestException("Wrong Apply code");
+        if(codeApplyRepository.findOneByCode(baseApplyRequestDto.getContent()).isPresent()) {
+            throw new BadRequestException("Already Code Apply Exist");
+        }
     }
 
+    @Override
+    public GroupResponseDto confirmApply(BaseApplyRequestDto baseApplyRequestDto) {
+        CodeApply codeApply = (CodeApply) codeApplyRepository.findOneByCode(baseApplyRequestDto.getContent()).orElseThrow(()->new BadRequestException("NOT EXIST CODE"));
+        Group group = codeApply.getGroup();
+        return new GroupResponseDto(group);
+    }
 }

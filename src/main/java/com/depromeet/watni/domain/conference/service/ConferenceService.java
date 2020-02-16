@@ -26,18 +26,17 @@ public class ConferenceService {
     public Conference generateConference(ConferenceRequestDto conferenceRequestDto, Group group) throws IOException {
         Conference conference = conferenceRepository.save(conferenceRequestDto.toEntity(group));
         if (conferenceRequestDto.getBase64Image() != null) {
-            conferenceRequestDto.setBase64Image(this.uploadConferencePhoto(conferenceRequestDto,  conference));
+            conference.setPhotoUrl(uploadConferencePhoto(conferenceRequestDto, conference));
             conference = conferenceRepository.save(conferenceRequestDto.toEntity(conference));
         }
         return conference;
     }
 
     public Conference updateConference(ConferenceRequestDto conferenceRequestDto, Conference conference) throws IOException {
-        System.out.println(conferenceRequestDto.toString());
         if (conferenceRequestDto.getBase64Image() != null) {
             conferenceRequestDto.setBase64Image(this.uploadConferencePhoto(conferenceRequestDto,  conference));
-            conference = conferenceRepository.save(conferenceRequestDto.toEntity(conference));
         }
+        conference = conferenceRepository.save(conferenceRequestDto.toEntity(conference));
         return conference;
     }
 

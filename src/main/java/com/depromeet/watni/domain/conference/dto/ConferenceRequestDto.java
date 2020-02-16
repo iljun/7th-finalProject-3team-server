@@ -14,6 +14,9 @@ public class ConferenceRequestDto {
     public interface create{}
     public interface update{}
 
+    @NotNull(groups = update.class)
+    private Long conferenceId;
+
     @NotNull(groups = create.class)
     private String name;
 
@@ -43,7 +46,6 @@ public class ConferenceRequestDto {
                 .locationInfo(this.locationInfo)
                 .startAt(this.startAt)
                 .endAt(this.endAt)
-                .photoUrl(this.base64Image == null ? null : this.base64Image)
                 .notice(this.notice == null ? null : this.notice);
     }
 
@@ -54,9 +56,17 @@ public class ConferenceRequestDto {
     }
 
     public Conference toEntity(Conference conference) {
-        return this.toEntity()
+        return Conference
+                .builder()
                 .conferenceId(conference.getConferenceId())
                 .group(conference.getGroup())
+                .name(this.name == null ? conference.getName() : this.name)
+                .description(this.description == null ? conference.getDescription() : this.description)
+                .locationInfo(this.locationInfo == null ? conference.getLocationInfo() : this.locationInfo)
+                .startAt(this.startAt == null ? conference.getStartAt() : this.startAt)
+                .endAt(this.endAt == null ? conference.getEndAt() : this.endAt)
+                .photoUrl(this.base64Image == null ? conference.getPhotoUrl() : this.base64Image)
+                .notice(this.notice == null ? conference.getNotice() : this.notice)
                 .build();
     }
 }

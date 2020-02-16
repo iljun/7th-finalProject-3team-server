@@ -58,7 +58,7 @@ public class MemberDocuments {
 
     @Before
     public void setUp() throws IOException  {
-        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference1", "test1", "공덕 창업 허브센터1", null, null, null, null, null);
+        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto(null, "testConference1", "test1", "공덕 창업 허브센터1", null, null, null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
                 .groupName("testGroup1")

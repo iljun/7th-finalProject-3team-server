@@ -74,7 +74,7 @@ public class AttendanceDocuments {
     @Before
     public void setup() throws IOException {
         LocalDateTime localDateTime = LocalDateTime.now();
-        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto("testConference", "test", "공덕 창업 허브센터", localDateTime, localDateTime.plusDays(1), null, null, null);
+        ConferenceRequestDto conferenceRequestDto = new ConferenceRequestDto(null, "testConference", "test", "공덕 창업 허브센터", localDateTime, localDateTime.plusDays(1), null, null, null);
         GroupDto groupDto = GroupDto
                 .builder()
                 .description("test")

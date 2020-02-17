@@ -166,10 +166,6 @@ include::{snippets}/CHECK_APPLY_CODE/http-request.adoc[]
 
 include::{snippets}/CHECK_APPLY_CODE/path-parameters.adoc[]
 
-==== Response
-
-include::{snippets}/CHECK_APPLY_CODE/response-fields.adoc[]
-
 ==== Response Example
 
 include::{snippets}/CHECK_APPLY_CODE/http-response.adoc[]
@@ -378,10 +374,6 @@ include::{snippets}/POST_ACCESS_GROUP/http-request.adoc[]
 ==== Path Parameters
 
 include::{snippets}/POST_ACCESS_GROUP/path-parameters.adoc[]
-
-==== Response
-
-include::{snippets}/POST_ACCESS_GROUP/response-fields.adoc[]
 
 ==== Response Example
 

@@ -156,19 +156,20 @@ include::{snippets}/GET_APPLY_WAY/http-response.adoc[]
 
 ==== Request Header
 
-include::{snippets}/CHECK_APPLY_CODE_CORRECT/request-headers.adoc[]
+include::{snippets}/CHECK_APPLY_CODE/request-headers.adoc[]
 
 ==== Request
 
-include::{snippets}/CHECK_APPLY_CODE_CORRECT/http-request.adoc[]
+include::{snippets}/CHECK_APPLY_CODE/http-request.adoc[]
 
 ==== Path Parameters
 
-include::{snippets}/CHECK_APPLY_CODE_CORRECT/path-parameters.adoc[]
+include::{snippets}/CHECK_APPLY_CODE/path-parameters.adoc[]
 
 ==== Response Example
 
-include::{snippets}/CHECK_APPLY_CODE_CORRECT/http-response.adoc[]
+include::{snippets}/CHECK_APPLY_CODE/http-response.adoc[]
+
 
 == Conference API
 

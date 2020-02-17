@@ -1,5 +1,6 @@
 package com.depromeet.watni.domain.apply.api;
 
+import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.apply.domain.BaseApply;
 import com.depromeet.watni.domain.apply.domain.CodeApply;
 import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
@@ -19,10 +20,12 @@ public class ApplyApi {
 
     private final ApplyServiceFactory applyServiceFactory;
     private final GroupService groupService;
+    private final AccessionService accessionService;
     public ApplyApi(ApplyServiceFactory applyServiceFactory,
-                    GroupService groupService) {
+                    GroupService groupService, AccessionService accessionService) {
         this.applyServiceFactory = applyServiceFactory;
         this.groupService = groupService;
+        this.accessionService = accessionService;
     }
 
     @PostMapping("/api/group/{groupId}/apply-way")
@@ -39,6 +42,7 @@ public class ApplyApi {
 
     @GetMapping("/api/group/{groupId}/apply-way")
     public ResponseEntity getApply(@PathVariable long groupId,
+                                   @AuthenticationPrincipal MemberDetail memberDetail,
                                         @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
         
@@ -50,7 +54,7 @@ public class ApplyApi {
 
     @GetMapping("/api/group/{groupId}/apply-way/check")
     public ResponseEntity checkApply(@PathVariable long groupId,
-
+                                     @AuthenticationPrincipal MemberDetail memberDetail,
                                    @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
         Group group = groupService.selectGroupByGroupId(groupId);
         //group.isAdministrator(memberDetail);

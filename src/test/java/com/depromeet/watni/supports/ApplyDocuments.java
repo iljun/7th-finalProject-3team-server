@@ -167,43 +167,5 @@ public class ApplyDocuments {
                 );
 
     }
-
-    @Test
-    public void 코드_그룹_참여() throws Exception {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("applyType", "CODE");
-        jsonObject.put("content", "getCode");
-
-        ResultActions result = this.mockMvc.perform(
-                post("/api/group/apply-way/confirm", group1.getGroupId())
-                        .header("Authorization", ApiDocumentUtils.getAuthorizationHeader(this.mockMvc))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonObject.toString())
-        ).andExpect(status().isAccepted());
-
-        result.andExpect(status().isAccepted())
-                .andDo(document("CONFIRM_APPLY_CODE_CORRECT",
-                        getDocumentRequest(),
-                        getDocumentResponse(),
-                        requestHeaders(
-                                headerWithName("Authorization").description("user accessToken")
-                        ),
-                        responseFields(
-
-                                fieldWithPath("groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
-                                fieldWithPath("name").type(JsonFieldType.STRING).optional().description("그룹이름"),
-                                fieldWithPath("conferences").type(JsonFieldType.ARRAY).optional().description("모임"),
-                                fieldWithPath("conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
-                                fieldWithPath("conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
-                                fieldWithPath("conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
-                                fieldWithPath("conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
-                                fieldWithPath("conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
-                                fieldWithPath("conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
-                                fieldWithPath("conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
-                                fieldWithPath("conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice")
-                        )
-                        )
-                );
-
-    }
+    
 }

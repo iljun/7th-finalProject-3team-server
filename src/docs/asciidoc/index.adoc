@@ -174,27 +174,6 @@ include::{snippets}/CHECK_APPLY_CODE/response-fields.adoc[]
 
 include::{snippets}/CHECK_APPLY_CODE/http-response.adoc[]
 
-=== Group Code Apply Access
-
-==== Request Header
-
-include::{snippets}/CONFIRM_APPLY_CODE_CORRECT/request-headers.adoc[]
-
-==== Request
-
-include::{snippets}/CONFIRM_APPLY_CODE_CORRECT/http-request.adoc[]
-
-==== Path Parameters
-
-include::{snippets}/CONFIRM_APPLY_CODE_CORRECT/path-parameters.adoc[]
-
-==== Response
-
-include::{snippets}/CONFIRM_APPLY_CODE_CORRECT/response-fields.adoc[]
-
-==== Response Example
-
-include::{snippets}/CONFIRM_APPLY_CODE_CORRECT/http-response.adoc[]
 
 == Conference API
 

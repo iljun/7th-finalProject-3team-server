@@ -1,5 +1,8 @@
 package com.depromeet.watni.supports;
 
+import com.depromeet.watni.domain.apply.constant.ApplyType;
+import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
+import com.depromeet.watni.domain.apply.service.CodeApplyService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
 import com.depromeet.watni.domain.group.service.GroupGenerateService;
@@ -18,6 +21,7 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -28,10 +32,7 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.headerWit
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -48,6 +49,8 @@ public class AccessionDocuments {
     private GroupGenerateService groupGenerateService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private CodeApplyService codeApplyService;
 
     private Member member;
 
@@ -64,6 +67,11 @@ public class AccessionDocuments {
                 .build();
         MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
         group = groupGenerateService.createGroup(groupDto, memberDetail);
+
+        BaseApplyRequestDto baseApplyRequestDto = new BaseApplyRequestDto();
+        baseApplyRequestDto.setApplyType(ApplyType.CODE);
+        baseApplyRequestDto.setContent("participateCode");
+        codeApplyService.generateApply(baseApplyRequestDto,group);
     }
 
     @Test
@@ -72,9 +80,10 @@ public class AccessionDocuments {
         memberIdList.put(member.getMemberId());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("memberIdList", memberIdList);
+        jsonObject.put("code","participateCode");
 
         ResultActions result = this.mockMvc.perform(
-                post("/api/group/{groupId}/accession", group.getGroupId())
+                post("/api/group/accession", group.getGroupId())
                         .header("Authorization", ApiDocumentUtils.getAuthorizationHeader(this.mockMvc))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString())
@@ -87,11 +96,23 @@ public class AccessionDocuments {
                         requestHeaders(
                                 headerWithName("Authorization").description("user accessToken")
                         ),
-                        pathParameters(
-                                parameterWithName("groupId").description("group Id")
-                        ),
                         requestFields(
-                                fieldWithPath("memberIdList").description("memberId List")
+                                fieldWithPath("memberIdList").description("memberId List"),
+                                fieldWithPath("groupId").type(JsonFieldType.NUMBER).description("groupId").optional(),
+                                fieldWithPath("code").type(JsonFieldType.STRING).description("Group code").optional()
+                        ),
+                        responseFields(
+                                fieldWithPath("groupId").type(JsonFieldType.NUMBER).optional().description("그룹id"),
+                                fieldWithPath("name").type(JsonFieldType.STRING).optional().description("그룹이름"),
+                                fieldWithPath("conferences").type(JsonFieldType.ARRAY).optional().description("모임"),
+                                fieldWithPath("conferences[].conferenceId").type(JsonFieldType.NUMBER).optional().description("conference Id"),
+                                fieldWithPath("conferences[].name").type(JsonFieldType.STRING).optional().description("conference name"),
+                                fieldWithPath("conferences[].description").type(JsonFieldType.STRING).optional().description("conference description"),
+                                fieldWithPath("conferences[].locationInfo").type(JsonFieldType.STRING).optional().description("conference locationInfo"),
+                                fieldWithPath("conferences[].startAt").type(JsonFieldType.NUMBER).optional().description("conference startAt"),
+                                fieldWithPath("conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
+                                fieldWithPath("conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
+                                fieldWithPath("conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice")
                         )
                         )
                 );

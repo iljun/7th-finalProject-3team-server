@@ -8,15 +8,12 @@ import com.depromeet.watni.domain.apply.dto.CodeApplyResponseDto;
 import com.depromeet.watni.domain.apply.service.ApplyService;
 import com.depromeet.watni.domain.apply.service.ApplyServiceFactory;
 import com.depromeet.watni.domain.group.domain.Group;
-import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.member.MemberDetail;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 
 @RestController
 public class ApplyApi {
@@ -64,14 +61,5 @@ public class ApplyApi {
         ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
         applyService.checkApply(baseApplyRequestDto,group);
         return ResponseEntity.accepted().build();
-    }
-
-    @PostMapping("/api/group/apply-way/confirm")
-    public ResponseEntity confirm(@AuthenticationPrincipal MemberDetail memberDetail,
-                                     @RequestBody BaseApplyRequestDto baseApplyRequestDto) {
-        ApplyService applyService = applyServiceFactory.generateApplyService(baseApplyRequestDto.getApplyType());
-        GroupResponseDto group = applyService.confirmApply(baseApplyRequestDto);
-        accessionService.accessGroup(group.getGroupId(), Collections.singletonList(memberDetail.getMemberId()));
-        return ResponseEntity.accepted().body(group);
     }
 }

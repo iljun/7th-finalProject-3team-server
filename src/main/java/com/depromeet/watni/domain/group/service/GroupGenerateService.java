@@ -1,5 +1,6 @@
 package com.depromeet.watni.domain.group.service;
 
+import com.depromeet.watni.domain.accession.dto.AccessionDto;
 import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.dto.GroupDto;
@@ -33,7 +34,8 @@ public class GroupGenerateService {
         Group group = groupDto.toEntity();
         group = groupRepository.save(group);
         Member member = memberService.selectByMemberId(memberDetail.getMemberId());
-        accessionService.accessGroup(group.getGroupId(), Collections.singletonList(member.getMemberId()));
+        AccessionDto accessionDto = new AccessionDto(Collections.singletonList(member.getMemberId()),group.getGroupId());
+        accessionService.accessGroup(accessionDto);
 
         managerService.registerManager(group, member);
         return group;

@@ -371,9 +371,13 @@ include::{snippets}/POST_ACCESS_GROUP/request-headers.adoc[]
 
 include::{snippets}/POST_ACCESS_GROUP/http-request.adoc[]
 
-==== Path Parameters
+==== Request Body
 
-include::{snippets}/POST_ACCESS_GROUP/path-parameters.adoc[]
+include::{snippets}/POST_ACCESS_GROUP/request-body.adoc[]
+
+==== Response Body
+
+include::{snippets}/POST_ACCESS_GROUP/response-fields.adoc[]
 
 ==== Response Example
 

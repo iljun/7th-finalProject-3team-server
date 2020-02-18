@@ -16,7 +16,6 @@ import com.depromeet.watni.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,12 +34,11 @@ public class AccessionService {
     }
 
     @Transactional
-    public List<Accession> accessGroup(AccessionDto accessionDto) {
+    public Accession accessGroup(AccessionDto accessionDto,Long memberId) {
         Long groupId = null;
         if(accessionDto.getCode() == null && accessionDto.getGroupId() == null){
             throw new BadRequestException("Wrong Accession Request - groupId or code is required.");
         }
-
         if(accessionDto.getGroupId() != null){
             groupId = accessionDto.getGroupId();
         }
@@ -48,16 +46,13 @@ public class AccessionService {
             CodeApply codeApply = (CodeApply) codeApplyRepository.findOneByCode(accessionDto.getCode()).orElseThrow(()->new BadRequestException("NOT EXIST CODE"));
             groupId = codeApply.getGroup().getGroupId();
         }
-
         Group group = groupService.getGroup(groupId);
-        List<Accession> accesionList = new ArrayList<Accession>();
-        for (Long memberId : accessionDto.getMemberIdList()) {
-            Member member = memberService.selectByMemberId(memberId);
-            Accession accession = Accession.builder().accessionType(AccessionType.AUTO)
-                    .accessionStatus(AccessionStatus.ACCEPT).group(group).member(member).build();
-            accesionList.add(accession);
+        Member member = memberService.selectByMemberId(memberId);
+        if(accessionRepository.findOneByGroupAndMember(group,member).isPresent()){
+            throw new BadRequestException("This Group is already Access");
         }
-        return accessionRepository.saveAll(accesionList);
+        Accession accession = Accession.builder().accessionType(AccessionType.AUTO).accessionStatus(AccessionStatus.ACCEPT).group(group).member(member).build();
+        return accessionRepository.save(accession);
     }
 
     public void deleteAccess (Long accessId){

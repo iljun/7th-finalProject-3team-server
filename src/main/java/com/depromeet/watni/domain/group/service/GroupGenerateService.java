@@ -12,7 +12,6 @@ import com.depromeet.watni.domain.member.service.MemberService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
 
 @Service
 public class GroupGenerateService {
@@ -34,9 +33,8 @@ public class GroupGenerateService {
         Group group = groupDto.toEntity();
         group = groupRepository.save(group);
         Member member = memberService.selectByMemberId(memberDetail.getMemberId());
-        AccessionDto accessionDto = new AccessionDto(Collections.singletonList(member.getMemberId()),group.getGroupId());
-        accessionService.accessGroup(accessionDto);
-
+        AccessionDto accessionDto = new AccessionDto(group.getGroupId());
+        accessionService.accessGroup(accessionDto,memberDetail.getMemberId());
         managerService.registerManager(group, member);
         return group;
     }

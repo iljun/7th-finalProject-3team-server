@@ -6,10 +6,10 @@ import com.depromeet.watni.domain.accession.service.AccessionService;
 import com.depromeet.watni.domain.apply.service.ApplyServiceFactory;
 import com.depromeet.watni.domain.group.dto.GroupResponseDto;
 import com.depromeet.watni.domain.groupcode.GroupCodeService;
+import com.depromeet.watni.domain.member.MemberDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class AccessionApi {
@@ -24,10 +24,9 @@ public class AccessionApi {
     }
 
     @PostMapping("/api/group/accession")
-    public ResponseEntity accessGroup(@RequestBody AccessionDto accessionDto) {
-
-        List<Accession> accessions= accessionService.accessGroup(accessionDto);
-        GroupResponseDto group = new GroupResponseDto(accessions.get(0).getGroup());
+    public ResponseEntity accessGroup(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody AccessionDto accessionDto) {
+        Accession accession= accessionService.accessGroup(accessionDto,memberDetail.getMemberId());
+        GroupResponseDto group = new GroupResponseDto(accession.getGroup());
         return ResponseEntity.accepted().body(group);
     }
 

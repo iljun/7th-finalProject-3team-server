@@ -1,30 +1,22 @@
 package com.depromeet.watni.domain.accession.dto;
 
-import lombok.*;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 public class AccessionDto {
-
-	@NotNull
-	private List<Long> memberIdList;
 
 	private Long groupId;
 
 	private String code;
 
-	public AccessionDto(List<Long> memberIdList,Long groupId,String code){
-		this.memberIdList = memberIdList;
-		this.groupId = groupId;
+	public AccessionDto(String code){
 		this.code = code;
 	}
 
-	public AccessionDto(List<Long> memberIdList,Long groupId){
-		this.memberIdList = memberIdList;
+	public AccessionDto(Long groupId){
 		this.groupId = groupId;
 	}
 }

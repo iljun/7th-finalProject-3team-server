@@ -1,5 +1,6 @@
 package com.depromeet.watni.supports;
 
+import com.depromeet.watni.domain.accession.repository.AccessionRepository;
 import com.depromeet.watni.domain.apply.constant.ApplyType;
 import com.depromeet.watni.domain.apply.dto.BaseApplyRequestDto;
 import com.depromeet.watni.domain.apply.service.CodeApplyService;
@@ -11,7 +12,6 @@ import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.dto.MemberRequestDto;
 import com.depromeet.watni.domain.member.repository.MemberRepository;
 import com.depromeet.watni.domain.member.service.MemberService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +52,11 @@ public class AccessionDocuments {
     @Autowired
     private CodeApplyService codeApplyService;
 
+    @Autowired
+    private AccessionRepository accessionRepository;
+
+    private MemberDetail memberDetail;
+
     private Member member;
 
     private Group group;
@@ -65,7 +70,7 @@ public class AccessionDocuments {
                 .description("test")
                 .groupName("testGroup")
                 .build();
-        MemberDetail memberDetail = new MemberDetail(memberRepository.findById(1L).get());
+        memberDetail = new MemberDetail(memberRepository.findById(1L).get());
         group = groupGenerateService.createGroup(groupDto, memberDetail);
 
         BaseApplyRequestDto baseApplyRequestDto = new BaseApplyRequestDto();
@@ -76,10 +81,9 @@ public class AccessionDocuments {
 
     @Test
     public void 그룹_참가() throws Exception {
-        JSONArray memberIdList = new JSONArray();
-        memberIdList.put(member.getMemberId());
+        accessionRepository.deleteAll();
+        
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("memberIdList", memberIdList);
         jsonObject.put("code","participateCode");
 
         ResultActions result = this.mockMvc.perform(
@@ -97,7 +101,6 @@ public class AccessionDocuments {
                                 headerWithName("Authorization").description("user accessToken")
                         ),
                         requestFields(
-                                fieldWithPath("memberIdList").description("memberId List"),
                                 fieldWithPath("groupId").type(JsonFieldType.NUMBER).description("groupId").optional(),
                                 fieldWithPath("code").type(JsonFieldType.STRING).description("Group code").optional()
                         ),

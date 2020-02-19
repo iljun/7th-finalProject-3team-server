@@ -6,7 +6,7 @@ import com.depromeet.watni.domain.attendance.repository.AttendanceRepository;
 import com.depromeet.watni.domain.conference.domain.Conference;
 import com.depromeet.watni.domain.member.domain.Member;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface AttendanceService<T extends BaseAttendance, E extends BaseAttendanceRequestDto> {
@@ -17,6 +17,6 @@ public interface AttendanceService<T extends BaseAttendance, E extends BaseAtten
 
     default List<T> getAttendances(Conference conference) {
         return (List<T>) getAttendanceRepository().findByConference(conference)
-                .orElse(Collections.EMPTY_LIST);
+                .orElse(new ArrayList());
     }
 }

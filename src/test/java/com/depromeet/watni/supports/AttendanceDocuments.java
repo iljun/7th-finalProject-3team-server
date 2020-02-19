@@ -1,5 +1,9 @@
 package com.depromeet.watni.supports;
 
+import com.depromeet.watni.domain.accession.constant.AccessionStatus;
+import com.depromeet.watni.domain.accession.constant.AccessionType;
+import com.depromeet.watni.domain.accession.domain.Accession;
+import com.depromeet.watni.domain.accession.repository.AccessionRepository;
 import com.depromeet.watni.domain.attendance.dto.PhotoAttendanceRequestDto;
 import com.depromeet.watni.domain.attendance.service.PhotoAttendanceService;
 import com.depromeet.watni.domain.conference.domain.Conference;
@@ -66,6 +70,8 @@ public class AttendanceDocuments {
     private PhotoAttendanceService photoAttendanceService;
     @Autowired
     private GroupGenerateService groupGenerateService;
+    @Autowired
+    private AccessionRepository accessionRepository;
 
     private Group group;
     private Conference conference;
@@ -84,6 +90,15 @@ public class AttendanceDocuments {
         group = groupGenerateService.createGroup(groupDto, memberDetail);
         conference = conferenceService.generateConference(conferenceRequestDto, group);
         member = memberRepository.findById(1L).get();
+
+        Accession accession = Accession
+                .builder()
+                .accessionStatus(AccessionStatus.ACCEPT)
+                .group(group)
+                .accessionType(AccessionType.AUTO)
+                .member(memberRepository.findById(2L).get())
+                .build();
+        accessionRepository.save(accession);
     }
 
     @Test
@@ -158,8 +173,8 @@ public class AttendanceDocuments {
                                 fieldWithPath("[].name").type(JsonFieldType.STRING).description("user name"),
                                 fieldWithPath("[].attendanceType").type(JsonFieldType.STRING).description("attendance Type, now is only PHOTO support"),
                                 fieldWithPath("[].attendanceStatus").type(JsonFieldType.STRING).description("attendance status"),
-                                fieldWithPath("[].attendanceAt").type(JsonFieldType.NUMBER).description("attendance At"),
-                                fieldWithPath("[].imageUrl").type(JsonFieldType.STRING).description("upload image url")
+                                fieldWithPath("[].attendanceAt").type(JsonFieldType.NUMBER).description("attendance At").optional(),
+                                fieldWithPath("[].imageUrl").type(JsonFieldType.STRING).description("upload image url").optional()
                         )
                 ));
     }

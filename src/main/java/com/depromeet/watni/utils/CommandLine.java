@@ -28,8 +28,10 @@ public class CommandLine implements CommandLineRunner {
         if (profiles.contains("local")) {
             try {
                 memberService.selectByMemberId(1L);
+                memberService.selectByMemberId(2L);
             } catch (NotFoundException e) {
                 memberService.createMember(new MemberRequestDto("test@naver.com", passwordEncoder.encode("test"), "test"));
+                memberService.createMember(new MemberRequestDto("test2@naver.com", passwordEncoder.encode("test"), "test2"));
             }
         }
     }

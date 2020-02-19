@@ -1,6 +1,8 @@
 package com.depromeet.watni.domain.attendance.api;
 
+import com.depromeet.watni.domain.attendance.constant.AttendanceStatus;
 import com.depromeet.watni.domain.attendance.domain.BaseAttendance;
+import com.depromeet.watni.domain.attendance.domain.PhotoAttendance;
 import com.depromeet.watni.domain.attendance.dto.AttendanceMapper;
 import com.depromeet.watni.domain.attendance.dto.BaseAttendanceRequestDto;
 import com.depromeet.watni.domain.attendance.service.AttendanceService;
@@ -9,14 +11,17 @@ import com.depromeet.watni.domain.conference.domain.Conference;
 import com.depromeet.watni.domain.group.domain.Group;
 import com.depromeet.watni.domain.group.service.GroupService;
 import com.depromeet.watni.domain.member.MemberDetail;
+import com.depromeet.watni.domain.member.domain.Member;
 import com.depromeet.watni.domain.member.service.MemberService;
 import com.depromeet.watni.exception.BadRequestException;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,7 +73,24 @@ public class AttendanceApi<T extends BaseAttendanceRequestDto, E extends BaseAtt
                 .findFirst()
                 .orElseThrow(() -> new BadRequestException("NOT FOUND CONFERENCE"));
         List<E> attendances = attendanceService.getAttendances(conference);
+        List<Member> allMember = group.getAccessions()
+                .stream()
+                .map(accession -> accession.getMember())
+                .collect(Collectors.toList());
+        allMember.addAll(group.getManagers().stream().map(m -> m.getMember()).collect(Collectors.toList()));
 
+        allMember.removeIf(member -> attendances.stream().map(attendance -> attendance.getMember()).collect(Collectors.toList()).contains(member));
+
+        if (!CollectionUtils.isEmpty(allMember)) {
+            attendances.addAll((Collection<? extends E>) allMember
+                    .stream()
+                    .map(member -> PhotoAttendance
+                            .builder()
+                            .attendanceStatus(AttendanceStatus.NOT_PARTICIPATING)
+                            .member(member)
+                            .build()
+                    ).collect(Collectors.toList()));
+        }
         return ResponseEntity.ok(attendances
                 .stream()
                 .map(a -> ATTENDANCE_MAPPER.map(a))

@@ -1,7 +1,8 @@
 package com.depromeet.watni.domain.group.dto;
 
-import com.depromeet.watni.domain.conference.dto.ConferenceResponseDto;
+import com.depromeet.watni.domain.conference.dto.ConferenceResponse;
 import com.depromeet.watni.domain.group.domain.Group;
+import com.depromeet.watni.domain.member.domain.Member;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -19,14 +20,18 @@ public class GroupResponseDto {
 	private String name;
 	
 	@Builder.Default
-	private List<ConferenceResponseDto> conferences = new ArrayList<ConferenceResponseDto>();
-	//	@Builder.Default
-    //	private List<Accession> accessions = new ArrayList<Accession>();
+	private List<ConferenceResponse> conferences = new ArrayList<>();
 
 	public GroupResponseDto(Group group){
 		this.groupId = group.getGroupId();
 		this.name = group.getName();
-		this.conferences = group.getConferences().stream().map(conference -> new ConferenceResponseDto(conference)).collect(Collectors.toList());
+		this.conferences = group.getConferences().stream().map(conference -> new ConferenceResponse(conference)).collect(Collectors.toList());
+	}
+
+	public GroupResponseDto(Group group, Member member){
+		this.groupId = group.getGroupId();
+		this.name = group.getName();
+		this.conferences = group.getConferences().stream().map(conference -> new ConferenceResponse(conference,member)).collect(Collectors.toList());
 	}
 
 }

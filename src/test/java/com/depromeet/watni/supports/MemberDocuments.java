@@ -135,12 +135,12 @@ public class MemberDocuments {
                                 fieldWithPath("memberDetails[].group.conferences[].endAt").type(JsonFieldType.NUMBER).optional().description("conference endAt"),
                                 fieldWithPath("memberDetails[].group.conferences[].photoUrl").type(JsonFieldType.STRING).optional().description("conference photoUrl"),
                                 fieldWithPath("memberDetails[].group.conferences[].notice").type(JsonFieldType.STRING).optional().description("conference notice"),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances").type(JsonFieldType.ARRAY).description("My attendances"),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceId").type(JsonFieldType.NUMBER).description("attendance PK"),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceType").type(JsonFieldType.STRING).description("attendance Type, now is only PHOTO support"),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceStatus").type(JsonFieldType.STRING).description("attendance status"),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceAt").type(JsonFieldType.NUMBER).description("attendance At").optional(),
-                                fieldWithPath("memberDetails[].group.conferences[].attendances[].imageUrl").type(JsonFieldType.STRING).description("upload image url").optional(),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances").type(JsonFieldType.ARRAY).optional().description("My attendances"),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceId").type(JsonFieldType.NUMBER).optional().description("attendance PK"),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceType").type(JsonFieldType.STRING).optional().description("attendance Type, now is only PHOTO support"),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceStatus").type(JsonFieldType.STRING).optional().description("attendance status"),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances[].attendanceAt").type(JsonFieldType.NUMBER).optional().description("attendance At").optional(),
+                                fieldWithPath("memberDetails[].group.conferences[].attendances[].imageUrl").type(JsonFieldType.STRING).optional().description("upload image url").optional(),
                                 fieldWithPath("memberDetails[].manager").type(JsonFieldType.BOOLEAN).description("isManger")
                         )
                         )

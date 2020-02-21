@@ -41,10 +41,10 @@ public class Conference extends BaseEntity {
     @Builder.Default
     private List<BaseAttendance> attendances = new ArrayList<>();
 
-    @Column(name = "start_at")
+    @Column(name = "start_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime startAt;
 
-    @Column(name = "end_at")
+    @Column(name = "end_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime endAt;
 
     @Setter

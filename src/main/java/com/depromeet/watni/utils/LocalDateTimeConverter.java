@@ -21,14 +21,14 @@ public class LocalDateTimeConverter {
         @Override
         public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
             Timestamp timestamp = Timestamp.valueOf(localDateTime);
-            jsonGenerator.writeNumber(timestamp.getTime());
+            jsonGenerator.writeNumber(timestamp.getTime() / 1000);
         }
     }
 
     public static class LocalDateTimeJsonDeserializer extends JsonDeserializer<LocalDateTime> {
         @Override
         public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-            return LocalDateTime.ofInstant(Instant.ofEpochMilli(jsonParser.getValueAsLong()), ZoneId.systemDefault());
+            return LocalDateTime.ofInstant(Instant.ofEpochSecond(jsonParser.getValueAsLong()), ZoneId.systemDefault());
         }
     }
 }

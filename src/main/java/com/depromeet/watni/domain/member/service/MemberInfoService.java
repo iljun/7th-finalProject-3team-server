@@ -34,7 +34,7 @@ public class MemberInfoService {
         List<MemberInfoResponse> memberInfoResponses= new ArrayList<MemberInfoResponse>();
         for (Accession accession: accessions) {
             Group participateGroup = accession.getGroup();
-            GroupResponseDto group = new GroupResponseDto(participateGroup);
+            GroupResponseDto group = new GroupResponseDto(participateGroup,member);
             boolean isManager = managerRepository.findOneByGroupAndMember(participateGroup,member).isPresent();
             MemberInfoResponse memberInfo = new MemberInfoResponse(group,isManager);
             memberInfoResponses.add(memberInfo);

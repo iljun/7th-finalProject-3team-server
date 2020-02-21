@@ -56,7 +56,7 @@ public class Conference extends BaseEntity {
 
     public void availableAttendance() {
         LocalDateTime now = LocalDateTime.now();
-        if (!this.startAt.isBefore(now) || !this.endAt.isAfter(now)) {
+        if (now.isBefore(this.startAt) || now.isAfter(this.endAt)) {
             throw new BadRequestException("Attendance check is unavailable");
         }
     }
